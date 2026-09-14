@@ -1,0 +1,962 @@
+[
+  {
+    "id": 1,
+    "tema": "busca-nao-informada",
+    "frente": "Em P=(S,s0,A,T,G,C), o que representa S?",
+    "verso": "Conjunto de estados possíveis",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 2,
+    "tema": "busca-nao-informada",
+    "frente": "Qual a diferença entre estado e nó?",
+    "verso": "Estado é configuração; nó é estrutura do algoritmo.",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 3,
+    "tema": "busca-nao-informada",
+    "frente": "A fronteira contém apenas estados já expandidos. V ou F?",
+    "verso": "Falso",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 4,
+    "tema": "busca-nao-informada",
+    "frente": "Qual estrutura define a fronteira da BFS?",
+    "verso": "Fila FIFO",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 5,
+    "tema": "busca-nao-informada",
+    "frente": "Qual estrutura define a fronteira da DFS iterativa?",
+    "verso": "Pilha LIFO",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 6,
+    "tema": "busca-nao-informada",
+    "frente": "No grafo A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, qual a ordem de seleção BFS até H?",
+    "verso": "A,B,C,D,E,F,G,H",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 7,
+    "tema": "busca-nao-informada",
+    "frente": "No mesmo grafo explicitado: A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes. Qual caminho BFS de A até H?",
+    "verso": "A→B→E→H",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 8,
+    "tema": "busca-nao-informada",
+    "frente": "Fila BFS [A]; A gera B,C. B é removido e gera D,E. Qual fila resulta, remoção à esquerda?",
+    "verso": "C,D,E",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 9,
+    "tema": "busca-nao-informada",
+    "frente": "Pilha DFS [C,B], topo à direita. Remove B e insere E,D. Qual será o próximo removido?",
+    "verso": "D",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 10,
+    "tema": "busca-nao-informada",
+    "frente": "DFS em A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, explorando da esquerda para a direita: seleção até H?",
+    "verso": "A,B,D,E,H",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 11,
+    "tema": "busca-nao-informada",
+    "frente": "Na pilha vazia, inserir B e depois C faz qual nó sair primeiro?",
+    "verso": "C",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 12,
+    "tema": "busca-nao-informada",
+    "frente": "A BFS garante menor custo quando todas as ações têm o mesmo custo positivo. V ou F?",
+    "verso": "Verdadeiro",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 13,
+    "tema": "busca-nao-informada",
+    "frente": "DFS sempre encontra o menor caminho. V ou F?",
+    "verso": "Falso",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 14,
+    "tema": "busca-nao-informada",
+    "frente": "Por que a DFS pode falhar em espaço infinito?",
+    "verso": "Pode seguir um ramo infinito sem explorar a alternativa com solução.",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 15,
+    "tema": "busca-nao-informada",
+    "frente": "O que é backtracking?",
+    "verso": "Retornar para explorar uma alternativa pendente.",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 16,
+    "tema": "busca-nao-informada",
+    "frente": "A→B custa 3, B→D custa 4, D→F custa 2. Qual g(F)?",
+    "verso": "9",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 17,
+    "tema": "busca-nao-informada",
+    "frente": "No caminho A→B→D→F, qual a profundidade de F?",
+    "verso": "3",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 18,
+    "tema": "busca-nao-informada",
+    "frente": "Custo Uniforme escolhe qual valor?",
+    "verso": "Menor g(n)",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 19,
+    "tema": "busca-nao-informada",
+    "frente": "A→B→G tem custo 15 em 2 passos; A→C→D→G tem custo 9 em 3 passos. Qual é mais barato?",
+    "verso": "A→C→D→G",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 20,
+    "tema": "busca-nao-informada",
+    "frente": "Fronteira de Custo Uniforme: B(g=7), C(g=2), D(g=5). Quem sai?",
+    "verso": "C",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 21,
+    "tema": "busca-nao-informada",
+    "frente": "Busca limitada com L=2 encontra necessariamente uma solução na profundidade 3? V ou F?",
+    "verso": "Falso",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 22,
+    "tema": "busca-nao-informada",
+    "frente": "Qual sequência de limites caracteriza aprofundamento iterativo?",
+    "verso": "0,1,2,3,…",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 23,
+    "tema": "busca-nao-informada",
+    "frente": "O que o aprofundamento iterativo combina?",
+    "verso": "Memória da DFS e busca de soluções rasas da BFS",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 24,
+    "tema": "busca-nao-informada",
+    "frente": "O que a busca bidirecional precisa fazer a partir do objetivo?",
+    "verso": "Gerar predecessores",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 25,
+    "tema": "busca-nao-informada",
+    "frente": "Para b=3, quantos nós há em um nível completo de profundidade 5?",
+    "verso": "243",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 26,
+    "tema": "busca-nao-informada",
+    "frente": "Com b=3, qual o total de nós até a profundidade 5, incluindo a raiz?",
+    "verso": "364",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 27,
+    "tema": "busca-nao-informada",
+    "frente": "Associe b, d e m a seus significados.",
+    "verso": "b: ramificação; d: profundidade da solução mais próxima; m: profundidade máxima.",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 28,
+    "tema": "busca-nao-informada",
+    "frente": "Como impedir a repetição A→B→C→A em busca em grafo?",
+    "verso": "Registrar estados explorados e controlar repetições.",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 29,
+    "tema": "busca-nao-informada",
+    "frente": "Por que sequência de visitas não é necessariamente caminho da solução?",
+    "verso": "Visitas podem pertencer a ramos diferentes e não ter arestas entre si.",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 30,
+    "tema": "busca-nao-informada",
+    "frente": "Na atividade A:[B,C], B:[D,E], C:[F], D:[G], E:[G,H], F:[H], G:[I], H:[I], I:[], qual caminho BFS até I, vizinhos na ordem dada?",
+    "verso": "A→B→D→G→I",
+    "nivel": "básico",
+    "fonte": "Aula 05, p. 2–37"
+  },
+  {
+    "id": 31,
+    "tema": "busca-nao-informada",
+    "frente": "O que faz T?",
+    "verso": "Descreve a transição / sucessores.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 32,
+    "tema": "busca-nao-informada",
+    "frente": "O que faz G?",
+    "verso": "Testa se o estado é objetivo.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 33,
+    "tema": "busca-nao-informada",
+    "frente": "O que faz C?",
+    "verso": "Atribui custo às ações/caminhos.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 34,
+    "tema": "busca-nao-informada",
+    "frente": "Profundidade inicial?",
+    "verso": "Zero.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 35,
+    "tema": "busca-nao-informada",
+    "frente": "Como reconstruir um caminho?",
+    "verso": "Siga pais e inverta a sequência.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 36,
+    "tema": "busca-nao-informada",
+    "frente": "Busca em árvore pode repetir estado?",
+    "verso": "Sim, em caminhos diferentes.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 37,
+    "tema": "busca-nao-informada",
+    "frente": "Completude significa?",
+    "verso": "Encontrar solução quando existe, sob condições.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 38,
+    "tema": "busca-nao-informada",
+    "frente": "Otimalidade significa?",
+    "verso": "Encontrar solução de menor custo.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 39,
+    "tema": "busca-nao-informada",
+    "frente": "DFS recursiva usa qual memória?",
+    "verso": "A pilha de chamadas.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 40,
+    "tema": "busca-nao-informada",
+    "frente": "Limite L pode excluir solução?",
+    "verso": "Sim, se a solução estiver além de L.",
+    "nivel": "básico",
+    "fonte": "Aula 05"
+  },
+  {
+    "id": 41,
+    "tema": "busca-informada",
+    "frente": "O que representa h(n)?",
+    "verso": "Estimativa do custo restante até o objetivo",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 42,
+    "tema": "busca-informada",
+    "frente": "Qual é a prioridade da Busca Gulosa?",
+    "verso": "Menor h(n)",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 43,
+    "tema": "busca-informada",
+    "frente": "Qual é a função de avaliação de A*?",
+    "verso": "f(n)=g(n)+h(n)",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 44,
+    "tema": "busca-informada",
+    "frente": "Se g=4 e h=7, qual f?",
+    "verso": "11",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 45,
+    "tema": "busca-informada",
+    "frente": "Se f=15 e g=6, qual h?",
+    "verso": "9",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 46,
+    "tema": "busca-informada",
+    "frente": "Se g do pai é 3 e a aresta custa 5, qual g do sucessor?",
+    "verso": "8",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 47,
+    "tema": "busca-informada",
+    "frente": "Manhattan de (2,3) até (7,6)?",
+    "verso": "8",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 48,
+    "tema": "busca-informada",
+    "frente": "Manhattan de (0,0) até (4,4)?",
+    "verso": "8",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 49,
+    "tema": "busca-informada",
+    "frente": "Manhattan de (3,4) até (1,1)?",
+    "verso": "5",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 50,
+    "tema": "busca-informada",
+    "frente": "Manhattan de (−2,1) até (3,−3)?",
+    "verso": "9",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 51,
+    "tema": "busca-informada",
+    "frente": "Euclidiana de (0,0) até (3,4)?",
+    "verso": "5",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 52,
+    "tema": "busca-informada",
+    "frente": "Euclidiana de (2,3) até (7,6)?",
+    "verso": "√34 ≈ 5,83",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 53,
+    "tema": "busca-informada",
+    "frente": "Gulosa tem B(h=5) e C(h=7) na fronteira. Qual seleciona?",
+    "verso": "B",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 54,
+    "tema": "busca-informada",
+    "frente": "A* tem B(g=2,h=6), C(g=4,h=5) e E(g=4,h=4). Com empate por descoberta e B descoberto primeiro, quem sai?",
+    "verso": "B",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 55,
+    "tema": "busca-informada",
+    "frente": "No grafo da aula: A–B=2,A–C=4,B–D=5,B–E=2,C–E=1,C–F=5,D–G=3,E–G=6,F–G=4; h(B,C,D,E,F,G)=(6,5,2,4,4,0). Gulosa, E antes de F no empate, segue qual solução?",
+    "verso": "A→C→E→G, custo 11",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 56,
+    "tema": "busca-informada",
+    "frente": "O que é lista aberta no A*?",
+    "verso": "Nós descobertos ainda não expandidos, priorizados por f",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 57,
+    "tema": "busca-informada",
+    "frente": "O que é lista fechada no A*?",
+    "verso": "Estados já expandidos",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 58,
+    "tema": "busca-informada",
+    "frente": "Se h*=10, qual valor viola admissibilidade nesse estado?",
+    "verso": "14",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 59,
+    "tema": "busca-informada",
+    "frente": "Se h*=10 e h=7, a condição de admissibilidade vale nesse estado. V ou F?",
+    "verso": "Verdadeiro",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 60,
+    "tema": "busca-informada",
+    "frente": "Com h(n)=7, c=3 e h(n′)=4, a consistência vale nessa aresta?",
+    "verso": "Sim, pois 7≤3+4",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 61,
+    "tema": "busca-informada",
+    "frente": "Com h(n)=8, c=3 e h(n′)=4, a consistência vale nessa aresta?",
+    "verso": "Não, pois 8>3+4",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 62,
+    "tema": "busca-informada",
+    "frente": "Toda heurística consistente é admissível nas condições usuais com h(objetivo)=0. V ou F?",
+    "verso": "Verdadeiro",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 63,
+    "tema": "busca-informada",
+    "frente": "Se h(n)=0 para todo n, A* equivale a qual busca?",
+    "verso": "Busca de Custo Uniforme",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 64,
+    "tema": "busca-informada",
+    "frente": "Uma heurística que superestima sempre mantém a garantia de ótimo do A*. V ou F?",
+    "verso": "Falso",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 65,
+    "tema": "busca-informada",
+    "frente": "Qual pior caso de tempo é apresentado para Gulosa na aula?",
+    "verso": "O(b^m)",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 66,
+    "tema": "busca-informada",
+    "frente": "Qual pior caso de tempo é apresentado para A* na aula?",
+    "verso": "O(b^d)",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 67,
+    "tema": "busca-informada",
+    "frente": "Na grade original da professora, S=(0,0), G=(4,4). Qual h(S) Manhattan?",
+    "verso": "8",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 68,
+    "tema": "busca-informada",
+    "frente": "Mapa S..#./##.#./...../.###./....G, quatro movimentos de custo 1: qual custo ótimo?",
+    "verso": "8",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 69,
+    "tema": "busca-informada",
+    "frente": "No mapa S..#./##.#./...../.###./....G, bloquear também (2,3) faz o custo ótimo ser quanto?",
+    "verso": "12",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 70,
+    "tema": "busca-informada",
+    "frente": "Associe g, h e f às três perguntas de A*.",
+    "verso": "g: quanto gastei; h: quanto falta estimado; f: total estimado.",
+    "nivel": "básico",
+    "fonte": "Aula 06, p. 2–23"
+  },
+  {
+    "id": 71,
+    "tema": "busca-informada",
+    "frente": "Heurística para 8 peças no slide?",
+    "verso": "Número de peças fora do lugar.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 72,
+    "tema": "busca-informada",
+    "frente": "Heurística para rotas?",
+    "verso": "Distância em linha reta.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 73,
+    "tema": "busca-informada",
+    "frente": "h no objetivo, na convenção usual?",
+    "verso": "Zero.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 74,
+    "tema": "busca-informada",
+    "frente": "Euclidiana entre (1,1) e (1,6)?",
+    "verso": "5.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 75,
+    "tema": "busca-informada",
+    "frente": "Manhattan entre posições iguais?",
+    "verso": "0.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 76,
+    "tema": "busca-informada",
+    "frente": "Se g=8 e h=4, f=?",
+    "verso": "12.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 77,
+    "tema": "busca-informada",
+    "frente": "Se h supera h*, qual propriedade falha?",
+    "verso": "Admissibilidade.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 78,
+    "tema": "busca-informada",
+    "frente": "Consistência precisa valer onde?",
+    "verso": "Em toda transição.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 79,
+    "tema": "busca-informada",
+    "frente": "A* pode gastar muita memória?",
+    "verso": "Sim, guarda estados descobertos.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 80,
+    "tema": "busca-informada",
+    "frente": "Heurística de planejamento citada?",
+    "verso": "Tempo restante estimado.",
+    "nivel": "básico",
+    "fonte": "Aula 06"
+  },
+  {
+    "id": 81,
+    "tema": "representacao-conhecimento",
+    "frente": "38,5 sem contexto corresponde a quê no exemplo da aula?",
+    "verso": "Dado",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 82,
+    "tema": "representacao-conhecimento",
+    "frente": "Temperatura = 38,5 °C corresponde a quê?",
+    "verso": "Informação",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 83,
+    "tema": "representacao-conhecimento",
+    "frente": "Temperatura acima de 38 °C pode indicar febre é exemplo de quê?",
+    "verso": "Conhecimento",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 84,
+    "tema": "representacao-conhecimento",
+    "frente": "Carlos tem nota 4,5; se nota<6, então abaixo da média. Concluir que Carlos está abaixo da média é o quê?",
+    "verso": "Inferência",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 85,
+    "tema": "representacao-conhecimento",
+    "frente": "Quais componentes a base de conhecimento armazena?",
+    "verso": "Fatos, regras, relações, conceitos e propriedades.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 86,
+    "tema": "representacao-conhecimento",
+    "frente": "Manaus está localizada no Amazonas é conhecimento de qual tipo?",
+    "verso": "Declarativo",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 87,
+    "tema": "representacao-conhecimento",
+    "frente": "Somar notas e dividir pela quantidade descreve conhecimento de qual tipo?",
+    "verso": "Procedural",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 88,
+    "tema": "representacao-conhecimento",
+    "frente": "Em idade(João,25), identifique entidade, propriedade e valor.",
+    "verso": "Entidade João; propriedade idade; valor 25.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 89,
+    "tema": "representacao-conhecimento",
+    "frente": "Humano(Sócrates) e ∀x(Humano(x)→Mortal(x)) permitem concluir o quê?",
+    "verso": "Mortal(Sócrates)",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 90,
+    "tema": "representacao-conhecimento",
+    "frente": "Aluno(Maria) é um exemplo de quê?",
+    "verso": "Predicado de propriedade",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 91,
+    "tema": "representacao-conhecimento",
+    "frente": "Pai(José,Carlos) equivale a Pai(Carlos,José). V ou F?",
+    "verso": "Falso",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 92,
+    "tema": "representacao-conhecimento",
+    "frente": "Qual estrutura caracteriza uma regra de produção?",
+    "verso": "SE condição ENTÃO conclusão ou ação",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 93,
+    "tema": "representacao-conhecimento",
+    "frente": "Qual é a função do motor de inferência?",
+    "verso": "Aplicar regras aos fatos para gerar conclusões.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 94,
+    "tema": "representacao-conhecimento",
+    "frente": "Para que serve a memória de trabalho?",
+    "verso": "Guardar fatos do caso e resultados intermediários.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 95,
+    "tema": "representacao-conhecimento",
+    "frente": "Fato A e regras A→B, B→C, C→D. Qual sequência forward?",
+    "verso": "A→B→C→D",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 96,
+    "tema": "representacao-conhecimento",
+    "frente": "Para provar D com A→B, B→C, C→D e fato A, qual é a sequência de submetas backward?",
+    "verso": "D, C, B, A",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 97,
+    "tema": "representacao-conhecimento",
+    "frente": "Associe Forward e Backward ao ponto de partida.",
+    "verso": "Forward: fatos; Backward: hipótese/meta.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 98,
+    "tema": "representacao-conhecimento",
+    "frente": "Rex é cachorro; cachorro é animal. Qual inferência?",
+    "verso": "Rex é animal",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 99,
+    "tema": "representacao-conhecimento",
+    "frente": "Em rede semântica, o que representam nós e ligações?",
+    "verso": "Nós: conceitos/entidades; ligações: relações.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 100,
+    "tema": "representacao-conhecimento",
+    "frente": "Uma ficha Aluno com nome, idade, curso e período exemplifica qual técnica?",
+    "verso": "Frame",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 101,
+    "tema": "representacao-conhecimento",
+    "frente": "Frame: Liga=SIM e Exibe_Imagem=NÃO. Pela regra da aula, qual possível problema?",
+    "verso": "Memória RAM ou vídeo",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 102,
+    "tema": "representacao-conhecimento",
+    "frente": "Conecta_Internet=NÃO INFORMADO é igual a Conecta_Internet=NÃO. V ou F?",
+    "verso": "Falso",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 103,
+    "tema": "representacao-conhecimento",
+    "frente": "O que uma ontologia define?",
+    "verso": "Conceitos, categorias, propriedades, relações e restrições do domínio.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 104,
+    "tema": "representacao-conhecimento",
+    "frente": "Notebook é Computador; Computador é Eletrônico. Isso contribui para qual recurso de uma ontologia?",
+    "verso": "Hierarquia de conceitos",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 105,
+    "tema": "representacao-conhecimento",
+    "frente": "Escreva uma tripla de conhecimento sobre Rafael e Interestelar.",
+    "verso": "Rafael → gostou → Interestelar",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 106,
+    "tema": "representacao-conhecimento",
+    "frente": "Por que A Origem pode ser recomendado após Interestelar no exemplo?",
+    "verso": "Compartilha diretor e gênero no grafo.",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 107,
+    "tema": "representacao-conhecimento",
+    "frente": "Qual descrição corresponde à IA simbólica?",
+    "verso": "Conhecimento em símbolos e regras explícitas",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 108,
+    "tema": "representacao-conhecimento",
+    "frente": "Qual descrição corresponde às redes neurais?",
+    "verso": "Aprendem representações numéricas a partir dos dados",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 109,
+    "tema": "representacao-conhecimento",
+    "frente": "Qual é a negação de ∀x P(x)?",
+    "verso": "∃x ¬P(x)",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 110,
+    "tema": "representacao-conhecimento",
+    "frente": "Regra nota≥6 E frequência≥75% → APROVADO. João(7,80%), Maria(5,90%), Pedro(8,60%): quem satisfaz a regra?",
+    "verso": "João",
+    "nivel": "básico",
+    "fonte": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+  },
+  {
+    "id": 111,
+    "tema": "representacao-conhecimento",
+    "frente": "Negação de ∃x P(x)?",
+    "verso": "∀x ¬P(x).",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 112,
+    "tema": "representacao-conhecimento",
+    "frente": "João em Aluno(João) é quê?",
+    "verso": "Constante.",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 113,
+    "tema": "representacao-conhecimento",
+    "frente": "x em Aluno(x) é quê?",
+    "verso": "Variável.",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 114,
+    "tema": "representacao-conhecimento",
+    "frente": "∀ significa?",
+    "verso": "Para todo.",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 115,
+    "tema": "representacao-conhecimento",
+    "frente": "∃ significa?",
+    "verso": "Existe pelo menos um.",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 116,
+    "tema": "representacao-conhecimento",
+    "frente": "P→Q equivale a quê?",
+    "verso": "¬P∨Q.",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 117,
+    "tema": "representacao-conhecimento",
+    "frente": "Negação de P∧Q?",
+    "verso": "¬P∨¬Q.",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 118,
+    "tema": "representacao-conhecimento",
+    "frente": "Representação de todo aluno estuda?",
+    "verso": "∀x(Aluno(x)→Estuda(x)).",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 119,
+    "tema": "representacao-conhecimento",
+    "frente": "Representação de algum aluno estuda?",
+    "verso": "∃x(Aluno(x)∧Estuda(x)).",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  },
+  {
+    "id": 120,
+    "tema": "representacao-conhecimento",
+    "frente": "Neuro-simbólica combina o quê?",
+    "verso": "Redes neurais e IA simbólica.",
+    "nivel": "básico",
+    "fonte": "Aulas 03 e 04"
+  }
+]

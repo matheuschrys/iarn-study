@@ -1,0 +1,121 @@
+Frente	Verso	Tema	Fonte
+Em P=(S,s0,A,T,G,C), o que representa S?	Conjunto de estados possíveis	Busca não informada	Aula 05, p. 2–37
+Qual a diferença entre estado e nó?	Estado é configuração; nó é estrutura do algoritmo.	Busca não informada	Aula 05, p. 2–37
+A fronteira contém apenas estados já expandidos. V ou F?	Falso	Busca não informada	Aula 05, p. 2–37
+Qual estrutura define a fronteira da BFS?	Fila FIFO	Busca não informada	Aula 05, p. 2–37
+Qual estrutura define a fronteira da DFS iterativa?	Pilha LIFO	Busca não informada	Aula 05, p. 2–37
+No grafo A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, qual a ordem de seleção BFS até H?	A,B,C,D,E,F,G,H	Busca não informada	Aula 05, p. 2–37
+No mesmo grafo explicitado: A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes. Qual caminho BFS de A até H?	A→B→E→H	Busca não informada	Aula 05, p. 2–37
+Fila BFS [A]; A gera B,C. B é removido e gera D,E. Qual fila resulta, remoção à esquerda?	C,D,E	Busca não informada	Aula 05, p. 2–37
+Pilha DFS [C,B], topo à direita. Remove B e insere E,D. Qual será o próximo removido?	D	Busca não informada	Aula 05, p. 2–37
+DFS em A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, explorando da esquerda para a direita: seleção até H?	A,B,D,E,H	Busca não informada	Aula 05, p. 2–37
+Na pilha vazia, inserir B e depois C faz qual nó sair primeiro?	C	Busca não informada	Aula 05, p. 2–37
+A BFS garante menor custo quando todas as ações têm o mesmo custo positivo. V ou F?	Verdadeiro	Busca não informada	Aula 05, p. 2–37
+DFS sempre encontra o menor caminho. V ou F?	Falso	Busca não informada	Aula 05, p. 2–37
+Por que a DFS pode falhar em espaço infinito?	Pode seguir um ramo infinito sem explorar a alternativa com solução.	Busca não informada	Aula 05, p. 2–37
+O que é backtracking?	Retornar para explorar uma alternativa pendente.	Busca não informada	Aula 05, p. 2–37
+A→B custa 3, B→D custa 4, D→F custa 2. Qual g(F)?	9	Busca não informada	Aula 05, p. 2–37
+No caminho A→B→D→F, qual a profundidade de F?	3	Busca não informada	Aula 05, p. 2–37
+Custo Uniforme escolhe qual valor?	Menor g(n)	Busca não informada	Aula 05, p. 2–37
+A→B→G tem custo 15 em 2 passos; A→C→D→G tem custo 9 em 3 passos. Qual é mais barato?	A→C→D→G	Busca não informada	Aula 05, p. 2–37
+Fronteira de Custo Uniforme: B(g=7), C(g=2), D(g=5). Quem sai?	C	Busca não informada	Aula 05, p. 2–37
+Busca limitada com L=2 encontra necessariamente uma solução na profundidade 3? V ou F?	Falso	Busca não informada	Aula 05, p. 2–37
+Qual sequência de limites caracteriza aprofundamento iterativo?	0,1,2,3,…	Busca não informada	Aula 05, p. 2–37
+O que o aprofundamento iterativo combina?	Memória da DFS e busca de soluções rasas da BFS	Busca não informada	Aula 05, p. 2–37
+O que a busca bidirecional precisa fazer a partir do objetivo?	Gerar predecessores	Busca não informada	Aula 05, p. 2–37
+Para b=3, quantos nós há em um nível completo de profundidade 5?	243	Busca não informada	Aula 05, p. 2–37
+Com b=3, qual o total de nós até a profundidade 5, incluindo a raiz?	364	Busca não informada	Aula 05, p. 2–37
+Associe b, d e m a seus significados.	b: ramificação; d: profundidade da solução mais próxima; m: profundidade máxima.	Busca não informada	Aula 05, p. 2–37
+Como impedir a repetição A→B→C→A em busca em grafo?	Registrar estados explorados e controlar repetições.	Busca não informada	Aula 05, p. 2–37
+Por que sequência de visitas não é necessariamente caminho da solução?	Visitas podem pertencer a ramos diferentes e não ter arestas entre si.	Busca não informada	Aula 05, p. 2–37
+Na atividade A:[B,C], B:[D,E], C:[F], D:[G], E:[G,H], F:[H], G:[I], H:[I], I:[], qual caminho BFS até I, vizinhos na ordem dada?	A→B→D→G→I	Busca não informada	Aula 05, p. 2–37
+O que faz T?	Descreve a transição / sucessores.	Busca não informada	Aula 05
+O que faz G?	Testa se o estado é objetivo.	Busca não informada	Aula 05
+O que faz C?	Atribui custo às ações/caminhos.	Busca não informada	Aula 05
+Profundidade inicial?	Zero.	Busca não informada	Aula 05
+Como reconstruir um caminho?	Siga pais e inverta a sequência.	Busca não informada	Aula 05
+Busca em árvore pode repetir estado?	Sim, em caminhos diferentes.	Busca não informada	Aula 05
+Completude significa?	Encontrar solução quando existe, sob condições.	Busca não informada	Aula 05
+Otimalidade significa?	Encontrar solução de menor custo.	Busca não informada	Aula 05
+DFS recursiva usa qual memória?	A pilha de chamadas.	Busca não informada	Aula 05
+Limite L pode excluir solução?	Sim, se a solução estiver além de L.	Busca não informada	Aula 05
+O que representa h(n)?	Estimativa do custo restante até o objetivo	Busca informada	Aula 06, p. 2–23
+Qual é a prioridade da Busca Gulosa?	Menor h(n)	Busca informada	Aula 06, p. 2–23
+Qual é a função de avaliação de A*?	f(n)=g(n)+h(n)	Busca informada	Aula 06, p. 2–23
+Se g=4 e h=7, qual f?	11	Busca informada	Aula 06, p. 2–23
+Se f=15 e g=6, qual h?	9	Busca informada	Aula 06, p. 2–23
+Se g do pai é 3 e a aresta custa 5, qual g do sucessor?	8	Busca informada	Aula 06, p. 2–23
+Manhattan de (2,3) até (7,6)?	8	Busca informada	Aula 06, p. 2–23
+Manhattan de (0,0) até (4,4)?	8	Busca informada	Aula 06, p. 2–23
+Manhattan de (3,4) até (1,1)?	5	Busca informada	Aula 06, p. 2–23
+Manhattan de (−2,1) até (3,−3)?	9	Busca informada	Aula 06, p. 2–23
+Euclidiana de (0,0) até (3,4)?	5	Busca informada	Aula 06, p. 2–23
+Euclidiana de (2,3) até (7,6)?	√34 ≈ 5,83	Busca informada	Aula 06, p. 2–23
+Gulosa tem B(h=5) e C(h=7) na fronteira. Qual seleciona?	B	Busca informada	Aula 06, p. 2–23
+A* tem B(g=2,h=6), C(g=4,h=5) e E(g=4,h=4). Com empate por descoberta e B descoberto primeiro, quem sai?	B	Busca informada	Aula 06, p. 2–23
+No grafo da aula: A–B=2,A–C=4,B–D=5,B–E=2,C–E=1,C–F=5,D–G=3,E–G=6,F–G=4; h(B,C,D,E,F,G)=(6,5,2,4,4,0). Gulosa, E antes de F no empate, segue qual solução?	A→C→E→G, custo 11	Busca informada	Aula 06, p. 2–23
+O que é lista aberta no A*?	Nós descobertos ainda não expandidos, priorizados por f	Busca informada	Aula 06, p. 2–23
+O que é lista fechada no A*?	Estados já expandidos	Busca informada	Aula 06, p. 2–23
+Se h*=10, qual valor viola admissibilidade nesse estado?	14	Busca informada	Aula 06, p. 2–23
+Se h*=10 e h=7, a condição de admissibilidade vale nesse estado. V ou F?	Verdadeiro	Busca informada	Aula 06, p. 2–23
+Com h(n)=7, c=3 e h(n′)=4, a consistência vale nessa aresta?	Sim, pois 7≤3+4	Busca informada	Aula 06, p. 2–23
+Com h(n)=8, c=3 e h(n′)=4, a consistência vale nessa aresta?	Não, pois 8>3+4	Busca informada	Aula 06, p. 2–23
+Toda heurística consistente é admissível nas condições usuais com h(objetivo)=0. V ou F?	Verdadeiro	Busca informada	Aula 06, p. 2–23
+Se h(n)=0 para todo n, A* equivale a qual busca?	Busca de Custo Uniforme	Busca informada	Aula 06, p. 2–23
+Uma heurística que superestima sempre mantém a garantia de ótimo do A*. V ou F?	Falso	Busca informada	Aula 06, p. 2–23
+Qual pior caso de tempo é apresentado para Gulosa na aula?	O(b^m)	Busca informada	Aula 06, p. 2–23
+Qual pior caso de tempo é apresentado para A* na aula?	O(b^d)	Busca informada	Aula 06, p. 2–23
+Na grade original da professora, S=(0,0), G=(4,4). Qual h(S) Manhattan?	8	Busca informada	Aula 06, p. 2–23
+Mapa S..#./##.#./...../.###./....G, quatro movimentos de custo 1: qual custo ótimo?	8	Busca informada	Aula 06, p. 2–23
+No mapa S..#./##.#./...../.###./....G, bloquear também (2,3) faz o custo ótimo ser quanto?	12	Busca informada	Aula 06, p. 2–23
+Associe g, h e f às três perguntas de A*.	g: quanto gastei; h: quanto falta estimado; f: total estimado.	Busca informada	Aula 06, p. 2–23
+Heurística para 8 peças no slide?	Número de peças fora do lugar.	Busca informada	Aula 06
+Heurística para rotas?	Distância em linha reta.	Busca informada	Aula 06
+h no objetivo, na convenção usual?	Zero.	Busca informada	Aula 06
+Euclidiana entre (1,1) e (1,6)?	5.	Busca informada	Aula 06
+Manhattan entre posições iguais?	0.	Busca informada	Aula 06
+Se g=8 e h=4, f=?	12.	Busca informada	Aula 06
+Se h supera h*, qual propriedade falha?	Admissibilidade.	Busca informada	Aula 06
+Consistência precisa valer onde?	Em toda transição.	Busca informada	Aula 06
+A* pode gastar muita memória?	Sim, guarda estados descobertos.	Busca informada	Aula 06
+Heurística de planejamento citada?	Tempo restante estimado.	Busca informada	Aula 06
+38,5 sem contexto corresponde a quê no exemplo da aula?	Dado	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Temperatura = 38,5 °C corresponde a quê?	Informação	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Temperatura acima de 38 °C pode indicar febre é exemplo de quê?	Conhecimento	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Carlos tem nota 4,5; se nota<6, então abaixo da média. Concluir que Carlos está abaixo da média é o quê?	Inferência	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Quais componentes a base de conhecimento armazena?	Fatos, regras, relações, conceitos e propriedades.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Manaus está localizada no Amazonas é conhecimento de qual tipo?	Declarativo	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Somar notas e dividir pela quantidade descreve conhecimento de qual tipo?	Procedural	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Em idade(João,25), identifique entidade, propriedade e valor.	Entidade João; propriedade idade; valor 25.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Humano(Sócrates) e ∀x(Humano(x)→Mortal(x)) permitem concluir o quê?	Mortal(Sócrates)	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Aluno(Maria) é um exemplo de quê?	Predicado de propriedade	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Pai(José,Carlos) equivale a Pai(Carlos,José). V ou F?	Falso	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Qual estrutura caracteriza uma regra de produção?	SE condição ENTÃO conclusão ou ação	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Qual é a função do motor de inferência?	Aplicar regras aos fatos para gerar conclusões.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Para que serve a memória de trabalho?	Guardar fatos do caso e resultados intermediários.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Fato A e regras A→B, B→C, C→D. Qual sequência forward?	A→B→C→D	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Para provar D com A→B, B→C, C→D e fato A, qual é a sequência de submetas backward?	D, C, B, A	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Associe Forward e Backward ao ponto de partida.	Forward: fatos; Backward: hipótese/meta.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Rex é cachorro; cachorro é animal. Qual inferência?	Rex é animal	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Em rede semântica, o que representam nós e ligações?	Nós: conceitos/entidades; ligações: relações.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Uma ficha Aluno com nome, idade, curso e período exemplifica qual técnica?	Frame	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Frame: Liga=SIM e Exibe_Imagem=NÃO. Pela regra da aula, qual possível problema?	Memória RAM ou vídeo	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Conecta_Internet=NÃO INFORMADO é igual a Conecta_Internet=NÃO. V ou F?	Falso	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+O que uma ontologia define?	Conceitos, categorias, propriedades, relações e restrições do domínio.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Notebook é Computador; Computador é Eletrônico. Isso contribui para qual recurso de uma ontologia?	Hierarquia de conceitos	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Escreva uma tripla de conhecimento sobre Rafael e Interestelar.	Rafael → gostou → Interestelar	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Por que A Origem pode ser recomendado após Interestelar no exemplo?	Compartilha diretor e gênero no grafo.	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Qual descrição corresponde à IA simbólica?	Conhecimento em símbolos e regras explícitas	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Qual descrição corresponde às redes neurais?	Aprendem representações numéricas a partir dos dados	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Qual é a negação de ∀x P(x)?	∃x ¬P(x)	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Regra nota≥6 E frequência≥75% → APROVADO. João(7,80%), Maria(5,90%), Pedro(8,60%): quem satisfaz a regra?	João	Representação do conhecimento	Aula 03, p. 2–44; Aula 04, p. 6–39
+Negação de ∃x P(x)?	∀x ¬P(x).	Representação do conhecimento	Aulas 03 e 04
+João em Aluno(João) é quê?	Constante.	Representação do conhecimento	Aulas 03 e 04
+x em Aluno(x) é quê?	Variável.	Representação do conhecimento	Aulas 03 e 04
+∀ significa?	Para todo.	Representação do conhecimento	Aulas 03 e 04
+∃ significa?	Existe pelo menos um.	Representação do conhecimento	Aulas 03 e 04
+P→Q equivale a quê?	¬P∨Q.	Representação do conhecimento	Aulas 03 e 04
+Negação de P∧Q?	¬P∨¬Q.	Representação do conhecimento	Aulas 03 e 04
+Representação de todo aluno estuda?	∀x(Aluno(x)→Estuda(x)).	Representação do conhecimento	Aulas 03 e 04
+Representação de algum aluno estuda?	∃x(Aluno(x)∧Estuda(x)).	Representação do conhecimento	Aulas 03 e 04
+Neuro-simbólica combina o quê?	Redes neurais e IA simbólica.	Representação do conhecimento	Aulas 03 e 04

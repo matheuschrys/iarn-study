@@ -1,0 +1,2265 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Em P=(S,s0,A,T,G,C), o que representa S?",
+      "answer": "Conjunto de estados possíveis",
+      "explanation": "S reúne configurações; s0 é apenas a configuração inicial.",
+      "options": [
+        "Pilha de sucessores",
+        "Conjunto de soluções ótimas",
+        "Custo acumulado",
+        "Conjunto de estados possíveis"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 2,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Qual a diferença entre estado e nó?",
+      "answer": "Estado é configuração; nó é estrutura do algoritmo.",
+      "explanation": "Um nó pode guardar estado, pai, ação, profundidade e custo.",
+      "options": [
+        "Estado é configuração; nó é estrutura do algoritmo."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 3,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "A fronteira contém apenas estados já expandidos. V ou F?",
+      "answer": "Falso",
+      "explanation": "Ela contém nós descobertos que aguardam expansão.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 4,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Qual estrutura define a fronteira da BFS?",
+      "answer": "Fila FIFO",
+      "explanation": "O primeiro inserido é o primeiro removido.",
+      "options": [
+        "Fila por g+h",
+        "Fila por h",
+        "Fila FIFO",
+        "Pilha LIFO"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 5,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Qual estrutura define a fronteira da DFS iterativa?",
+      "answer": "Pilha LIFO",
+      "explanation": "O último inserido é o primeiro removido.",
+      "options": [
+        "Fila por menor g",
+        "Fila FIFO",
+        "Tabela por menor h",
+        "Pilha LIFO"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 6,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "No grafo A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, qual a ordem de seleção BFS até H?",
+      "answer": "A,B,C,D,E,F,G,H",
+      "explanation": "A BFS retira por níveis, com vizinhos na ordem dada.",
+      "options": [
+        "A,B,D,E,H",
+        "A,C,G,F,B,H",
+        "A,B,E,H",
+        "A,B,C,D,E,F,G,H"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 7,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "No mesmo grafo explicitado: A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes. Qual caminho BFS de A até H?",
+      "answer": "A→B→E→H",
+      "explanation": "O caminho vem dos pais de H, não da lista de visitas.",
+      "options": [
+        "A→B→D→H",
+        "A→C→H",
+        "A→B→E→H",
+        "A→B→C→D→E→F→G→H"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 8,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Fila BFS [A]; A gera B,C. B é removido e gera D,E. Qual fila resulta, remoção à esquerda?",
+      "answer": "C,D,E",
+      "explanation": "C aguardava; D e E entram ao final.",
+      "options": [
+        "C,D,E",
+        "B,C,D,E",
+        "E,D,C",
+        "D,E,C"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 9,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Pilha DFS [C,B], topo à direita. Remove B e insere E,D. Qual será o próximo removido?",
+      "answer": "D",
+      "explanation": "O topo fica D: pilha [C,E,D].",
+      "options": [
+        "D",
+        "E",
+        "B",
+        "C"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 10,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "DFS em A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, explorando da esquerda para a direita: seleção até H?",
+      "answer": "A,B,D,E,H",
+      "explanation": "Após D sem filhos, retorna a E; H encerra a busca.",
+      "options": [
+        "A,C,F,G,H",
+        "A,B,C,D,E,F,G,H",
+        "A,B,E,D,H",
+        "A,B,D,E,H"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 11,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Na pilha vazia, inserir B e depois C faz qual nó sair primeiro?",
+      "answer": "C",
+      "explanation": "O último inserido fica no topo.",
+      "options": [
+        "Depende de h",
+        "C",
+        "B",
+        "Ambos juntos"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 12,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "A BFS garante menor custo quando todas as ações têm o mesmo custo positivo. V ou F?",
+      "answer": "Verdadeiro",
+      "explanation": "Minimizar passos equivale a minimizar o custo nessa condição.",
+      "options": [
+        "Falso",
+        "Verdadeiro"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 13,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "DFS sempre encontra o menor caminho. V ou F?",
+      "answer": "Falso",
+      "explanation": "A profundidade do ramo não é critério de menor custo ou menor número de passos.",
+      "options": [
+        "Falso",
+        "Verdadeiro"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 14,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Por que a DFS pode falhar em espaço infinito?",
+      "answer": "Pode seguir um ramo infinito sem explorar a alternativa com solução.",
+      "explanation": "Controlar ciclos não elimina a possibilidade de infinitos estados distintos.",
+      "options": [
+        "Pode seguir um ramo infinito sem explorar a alternativa com solução."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 15,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "O que é backtracking?",
+      "answer": "Retornar para explorar uma alternativa pendente.",
+      "explanation": "Ao encerrar um ramo, a DFS retoma outro ramo disponível.",
+      "options": [
+        "Retornar para explorar uma alternativa pendente."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 16,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "A→B custa 3, B→D custa 4, D→F custa 2. Qual g(F)?",
+      "answer": "9",
+      "explanation": "Somamos 3+4+2=9.",
+      "options": [
+        "7",
+        "3",
+        "12",
+        "9"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 17,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "No caminho A→B→D→F, qual a profundidade de F?",
+      "answer": "3",
+      "explanation": "Há três arestas desde A, cuja profundidade é zero.",
+      "options": [
+        "9",
+        "2",
+        "4",
+        "3"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 18,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Custo Uniforme escolhe qual valor?",
+      "answer": "Menor g(n)",
+      "explanation": "Usa custo real acumulado, com fila de prioridade.",
+      "options": [
+        "Menor g+h",
+        "Menor h(n)",
+        "Menor g(n)",
+        "Maior profundidade"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 19,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "A→B→G tem custo 15 em 2 passos; A→C→D→G tem custo 9 em 3 passos. Qual é mais barato?",
+      "answer": "A→C→D→G",
+      "explanation": "Três passos podem custar menos do que dois.",
+      "options": [
+        "Os custos são iguais",
+        "Não existe solução",
+        "A→B→G",
+        "A→C→D→G"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 20,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Fronteira de Custo Uniforme: B(g=7), C(g=2), D(g=5). Quem sai?",
+      "answer": "C",
+      "explanation": "2 é o menor custo acumulado.",
+      "options": [
+        "C",
+        "B",
+        "O último inserido",
+        "D"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 21,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Busca limitada com L=2 encontra necessariamente uma solução na profundidade 3? V ou F?",
+      "answer": "Falso",
+      "explanation": "O limite impede expandir além da profundidade 2.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 22,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Qual sequência de limites caracteriza aprofundamento iterativo?",
+      "answer": "0,1,2,3,…",
+      "explanation": "Cada execução repete DFS limitada com limite maior.",
+      "options": [
+        "3,2,1,0",
+        "0,0,0,0",
+        "Sempre infinito",
+        "0,1,2,3,…"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 23,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "O que o aprofundamento iterativo combina?",
+      "answer": "Memória da DFS e busca de soluções rasas da BFS",
+      "explanation": "Repete buscas limitadas para encontrar a menor profundidade.",
+      "options": [
+        "Heurística e treinamento",
+        "Duas filas heurísticas",
+        "Memória da DFS e busca de soluções rasas da BFS",
+        "Maior custo e maior profundidade"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 24,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "O que a busca bidirecional precisa fazer a partir do objetivo?",
+      "answer": "Gerar predecessores",
+      "explanation": "Uma frente avança desde o início e outra no sentido inverso.",
+      "options": [
+        "Somente seguir arestas de saída do início",
+        "Ignorar o início",
+        "Calcular embeddings",
+        "Gerar predecessores"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 25,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Para b=3, quantos nós há em um nível completo de profundidade 5?",
+      "answer": "243",
+      "explanation": "3^5=243.",
+      "options": [
+        "243",
+        "15",
+        "125",
+        "364"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 26,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Com b=3, qual o total de nós até a profundidade 5, incluindo a raiz?",
+      "answer": "364",
+      "explanation": "1+3+9+27+81+243=364.",
+      "options": [
+        "364",
+        "363",
+        "729",
+        "243"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 27,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Associe b, d e m a seus significados.",
+      "answer": "b: ramificação; d: profundidade da solução mais próxima; m: profundidade máxima.",
+      "explanation": "São os parâmetros empregados na análise de busca da aula.",
+      "options": [
+        "b: ramificação; d: profundidade da solução mais próxima; m: profundidade máxima."
+      ],
+      "kind": "Associação"
+    },
+    {
+      "id": 28,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Como impedir a repetição A→B→C→A em busca em grafo?",
+      "answer": "Registrar estados explorados e controlar repetições.",
+      "explanation": "O conjunto permite reconhecer o retorno ao mesmo estado.",
+      "options": [
+        "Registrar estados explorados e controlar repetições."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 29,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Por que sequência de visitas não é necessariamente caminho da solução?",
+      "answer": "Visitas podem pertencer a ramos diferentes e não ter arestas entre si.",
+      "explanation": "A solução é reconstruída pelos pais, preservando as transições.",
+      "options": [
+        "Visitas podem pertencer a ramos diferentes e não ter arestas entre si."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 30,
+      "theme": "Busca não informada",
+      "source": "Aula 05, p. 2–37",
+      "prompt": "Na atividade A:[B,C], B:[D,E], C:[F], D:[G], E:[G,H], F:[H], G:[I], H:[I], I:[], qual caminho BFS até I, vizinhos na ordem dada?",
+      "answer": "A→B→D→G→I",
+      "explanation": "G é descoberto via D antes de E; I é descoberto via G.",
+      "options": [
+        "A→B→D→G→I",
+        "A→B→C→I",
+        "A→B→E→H→I→G",
+        "A→C→I"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 31,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "O que representa h(n)?",
+      "answer": "Estimativa do custo restante até o objetivo",
+      "explanation": "g mede o custo já percorrido; h estima o que falta.",
+      "options": [
+        "Custo real já percorrido",
+        "Quantidade de visitados",
+        "Profundidade máxima",
+        "Estimativa do custo restante até o objetivo"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 32,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Qual é a prioridade da Busca Gulosa?",
+      "answer": "Menor h(n)",
+      "explanation": "Ela ignora g na escolha, embora o custo do caminho possa ser calculado.",
+      "options": [
+        "Menor g+h",
+        "Maior h(n)",
+        "Menor h(n)",
+        "Menor g(n)"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 33,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Qual é a função de avaliação de A*?",
+      "answer": "f(n)=g(n)+h(n)",
+      "explanation": "Soma gasto real e estimativa restante.",
+      "options": [
+        "f=g×h",
+        "f(n)=g(n)+h(n)",
+        "f=g−h",
+        "f=h−g"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 34,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Se g=4 e h=7, qual f?",
+      "answer": "11",
+      "explanation": "4+7=11.",
+      "options": [
+        "3",
+        "7",
+        "11",
+        "28"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 35,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Se f=15 e g=6, qual h?",
+      "answer": "9",
+      "explanation": "h=f−g=15−6.",
+      "options": [
+        "2,5",
+        "6",
+        "21",
+        "9"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 36,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Se g do pai é 3 e a aresta custa 5, qual g do sucessor?",
+      "answer": "8",
+      "explanation": "O custo acumulado é 3+5.",
+      "options": [
+        "5",
+        "15",
+        "8",
+        "3"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 37,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Manhattan de (2,3) até (7,6)?",
+      "answer": "8",
+      "explanation": "5+3=8, conforme exemplo da aula.",
+      "options": [
+        "5,83",
+        "2",
+        "8",
+        "34"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 38,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Manhattan de (0,0) até (4,4)?",
+      "answer": "8",
+      "explanation": "4+4=8.",
+      "options": [
+        "8",
+        "4",
+        "16",
+        "5,66"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 39,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Manhattan de (3,4) até (1,1)?",
+      "answer": "5",
+      "explanation": "2+3=5.",
+      "options": [
+        "7",
+        "5",
+        "13",
+        "1"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 40,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Manhattan de (−2,1) até (3,−3)?",
+      "answer": "9",
+      "explanation": "5+4=9.",
+      "options": [
+        "9",
+        "7",
+        "−9",
+        "1"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 41,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Euclidiana de (0,0) até (3,4)?",
+      "answer": "5",
+      "explanation": "√(9+16)=5.",
+      "options": [
+        "5",
+        "7",
+        "25",
+        "1"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 42,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Euclidiana de (2,3) até (7,6)?",
+      "answer": "√34 ≈ 5,83",
+      "explanation": "√(25+9)=√34.",
+      "options": [
+        "8",
+        "√8",
+        "√34 ≈ 5,83",
+        "34"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 43,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Gulosa tem B(h=5) e C(h=7) na fronteira. Qual seleciona?",
+      "answer": "B",
+      "explanation": "Escolhe a menor estimativa, 5.",
+      "options": [
+        "C",
+        "Ambos simultaneamente",
+        "B",
+        "Depende somente de g"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 44,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "A* tem B(g=2,h=6), C(g=4,h=5) e E(g=4,h=4). Com empate por descoberta e B descoberto primeiro, quem sai?",
+      "answer": "B",
+      "explanation": "B e E têm f=8; C tem f=9; desempate favorece B.",
+      "options": [
+        "C",
+        "E",
+        "Não há como calcular f",
+        "B"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 45,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "No grafo da aula: A–B=2,A–C=4,B–D=5,B–E=2,C–E=1,C–F=5,D–G=3,E–G=6,F–G=4; h(B,C,D,E,F,G)=(6,5,2,4,4,0). Gulosa, E antes de F no empate, segue qual solução?",
+      "answer": "A→C→E→G, custo 11",
+      "explanation": "C tem h menor que B; E vence F no desempate; depois G tem h=0.",
+      "options": [
+        "A→B→D→G, custo 11",
+        "A→C→E→G, custo 11",
+        "A→C→F→G, custo 8",
+        "A→B→E→G, custo 7"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 46,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "O que é lista aberta no A*?",
+      "answer": "Nós descobertos ainda não expandidos, priorizados por f",
+      "explanation": "É a fronteira da busca.",
+      "options": [
+        "Nós descobertos ainda não expandidos, priorizados por f",
+        "Apenas estados expandidos",
+        "Somente o caminho final",
+        "Todas as paredes"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 47,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "O que é lista fechada no A*?",
+      "answer": "Estados já expandidos",
+      "explanation": "Algumas implementações podem reabri-los se surgir rota melhor.",
+      "options": [
+        "Nós nunca descobertos",
+        "Estados já expandidos",
+        "Todos os custos h",
+        "Somente objetivos"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 48,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Se h*=10, qual valor viola admissibilidade nesse estado?",
+      "answer": "14",
+      "explanation": "14 supera o custo mínimo real 10.",
+      "options": [
+        "0",
+        "7",
+        "10",
+        "14"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 49,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Se h*=10 e h=7, a condição de admissibilidade vale nesse estado. V ou F?",
+      "answer": "Verdadeiro",
+      "explanation": "7≤10; a propriedade global exige verificar todos os estados.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 50,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Com h(n)=7, c=3 e h(n′)=4, a consistência vale nessa aresta?",
+      "answer": "Sim, pois 7≤3+4",
+      "explanation": "A igualdade satisfaz a condição.",
+      "options": [
+        "Sim, pois 7≥3+4",
+        "Não, pois h deve ser zero",
+        "Não, pois deveria ser estrita",
+        "Sim, pois 7≤3+4"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 51,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Com h(n)=8, c=3 e h(n′)=4, a consistência vale nessa aresta?",
+      "answer": "Não, pois 8>3+4",
+      "explanation": "Uma única violação basta para mostrar inconsistência.",
+      "options": [
+        "Sim, pois 8≥7",
+        "Não, pois 8>3+4",
+        "Não se pode somar",
+        "Sim, pois 8 é positivo"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 52,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Toda heurística consistente é admissível nas condições usuais com h(objetivo)=0. V ou F?",
+      "answer": "Verdadeiro",
+      "explanation": "A aula apresenta essa implicação; a apostila explicita a condição no objetivo.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 53,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Se h(n)=0 para todo n, A* equivale a qual busca?",
+      "answer": "Busca de Custo Uniforme",
+      "explanation": "f=g+0=g.",
+      "options": [
+        "Busca bidirecional",
+        "Busca de Custo Uniforme",
+        "Gulosa com Manhattan",
+        "DFS"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 54,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Uma heurística que superestima sempre mantém a garantia de ótimo do A*. V ou F?",
+      "answer": "Falso",
+      "explanation": "A aula explica que a superestimação pode retirar essa garantia.",
+      "options": [
+        "Falso",
+        "Verdadeiro"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 55,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Qual pior caso de tempo é apresentado para Gulosa na aula?",
+      "answer": "O(b^m)",
+      "explanation": "b é ramificação e m profundidade máxima.",
+      "options": [
+        "O(log b)",
+        "O(1)",
+        "O(b^m)",
+        "O(m)"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 56,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Qual pior caso de tempo é apresentado para A* na aula?",
+      "answer": "O(b^d)",
+      "explanation": "É o limite exponencial apresentado no slide; a qualidade da heurística afeta a prática.",
+      "options": [
+        "O(1)",
+        "O(b^d)",
+        "O(log d)",
+        "O(d)"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 57,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Na grade original da professora, S=(0,0), G=(4,4). Qual h(S) Manhattan?",
+      "answer": "8",
+      "explanation": "4+4=8.",
+      "options": [
+        "0",
+        "8",
+        "4",
+        "16"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 58,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Mapa S..#./##.#./...../.###./....G, quatro movimentos de custo 1: qual custo ótimo?",
+      "answer": "8",
+      "explanation": "Caminho: (0,0),(0,1),(0,2),(1,2),(2,2),(2,3),(2,4),(3,4),(4,4).",
+      "options": [
+        "Não há solução",
+        "12",
+        "9",
+        "8"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 59,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "No mapa S..#./##.#./...../.###./....G, bloquear também (2,3) faz o custo ótimo ser quanto?",
+      "answer": "12",
+      "explanation": "O desvio passa pela esquerda da linha 2 e pela última linha; h(S) segue 8.",
+      "options": [
+        "Não há solução",
+        "9",
+        "12",
+        "8"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 60,
+      "theme": "Busca informada",
+      "source": "Aula 06, p. 2–23",
+      "prompt": "Associe g, h e f às três perguntas de A*.",
+      "answer": "g: quanto gastei; h: quanto falta estimado; f: total estimado.",
+      "explanation": "g é real acumulado; h é previsão; f é sua soma.",
+      "options": [
+        "g: quanto gastei; h: quanto falta estimado; f: total estimado."
+      ],
+      "kind": "Associação"
+    },
+    {
+      "id": 61,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "38,5 sem contexto corresponde a quê no exemplo da aula?",
+      "answer": "Dado",
+      "explanation": "É um valor isolado sem interpretação contextual.",
+      "options": [
+        "Inferência",
+        "Regra",
+        "Ontologia",
+        "Dado"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 62,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Temperatura = 38,5 °C corresponde a quê?",
+      "answer": "Informação",
+      "explanation": "O valor ganhou contexto e unidade.",
+      "options": [
+        "Dado isolado",
+        "Procedimento",
+        "Motor de inferência",
+        "Informação"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 63,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Temperatura acima de 38 °C pode indicar febre é exemplo de quê?",
+      "answer": "Conhecimento",
+      "explanation": "É uma relação utilizada para interpretar informações no exemplo didático.",
+      "options": [
+        "Conhecimento",
+        "Pilha",
+        "Sensor",
+        "Número isolado"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 64,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Carlos tem nota 4,5; se nota<6, então abaixo da média. Concluir que Carlos está abaixo da média é o quê?",
+      "answer": "Inferência",
+      "explanation": "Uma regra foi aplicada a um fato.",
+      "options": [
+        "Inferência",
+        "Ação de busca",
+        "Heurística",
+        "Armazenamento sem raciocínio"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 65,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Quais componentes a base de conhecimento armazena?",
+      "answer": "Fatos, regras, relações, conceitos e propriedades.",
+      "explanation": "São as categorias apresentadas na Aula 03, p. 11.",
+      "options": [
+        "Fatos, regras, relações, conceitos e propriedades."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 66,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Manaus está localizada no Amazonas é conhecimento de qual tipo?",
+      "answer": "Declarativo",
+      "explanation": "Declara o que se sabe.",
+      "options": [
+        "Heurístico",
+        "Declarativo",
+        "Exclusivamente numérico",
+        "Procedural"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 67,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Somar notas e dividir pela quantidade descreve conhecimento de qual tipo?",
+      "answer": "Procedural",
+      "explanation": "Descreve como executar uma tarefa.",
+      "options": [
+        "Procedural",
+        "Uma ontologia",
+        "Declarativo",
+        "Uma constante"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 68,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Em idade(João,25), identifique entidade, propriedade e valor.",
+      "answer": "Entidade João; propriedade idade; valor 25.",
+      "explanation": "A representação explicita componentes de uma informação.",
+      "options": [
+        "Entidade João; propriedade idade; valor 25."
+      ],
+      "kind": "Associação"
+    },
+    {
+      "id": 69,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Humano(Sócrates) e ∀x(Humano(x)→Mortal(x)) permitem concluir o quê?",
+      "answer": "Mortal(Sócrates)",
+      "explanation": "A regra universal se aplica ao fato específico.",
+      "options": [
+        "Mortal(Sócrates)",
+        "Todo mortal é humano",
+        "Sócrates é professor",
+        "Ninguém é mortal"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 70,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Aluno(Maria) é um exemplo de quê?",
+      "answer": "Predicado de propriedade",
+      "explanation": "Atribui uma propriedade à entidade Maria.",
+      "options": [
+        "Fila de prioridade",
+        "Custo do caminho",
+        "Operador aritmético",
+        "Predicado de propriedade"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 71,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Pai(José,Carlos) equivale a Pai(Carlos,José). V ou F?",
+      "answer": "Falso",
+      "explanation": "A ordem dos argumentos determina a direção da relação.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 72,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Qual estrutura caracteriza uma regra de produção?",
+      "answer": "SE condição ENTÃO conclusão ou ação",
+      "explanation": "As condições determinam quando aplicar a regra.",
+      "options": [
+        "Somente sujeito sem relação",
+        "Sempre uma lista numérica",
+        "SE condição ENTÃO conclusão ou ação",
+        "g+h"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 73,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Qual é a função do motor de inferência?",
+      "answer": "Aplicar regras aos fatos para gerar conclusões.",
+      "explanation": "Ele seleciona regras apropriadas e produz resultados.",
+      "options": [
+        "Aplicar regras aos fatos para gerar conclusões."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 74,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Para que serve a memória de trabalho?",
+      "answer": "Guardar fatos do caso e resultados intermediários.",
+      "explanation": "É o contexto corrente usado pelo motor de inferência.",
+      "options": [
+        "Guardar fatos do caso e resultados intermediários."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 75,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Fato A e regras A→B, B→C, C→D. Qual sequência forward?",
+      "answer": "A→B→C→D",
+      "explanation": "Parte dos fatos para derivar consequências.",
+      "options": [
+        "D→A",
+        "B→A→D→C",
+        "A→B→C→D",
+        "D→C→B→A"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 76,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Para provar D com A→B, B→C, C→D e fato A, qual é a sequência de submetas backward?",
+      "answer": "D, C, B, A",
+      "explanation": "Parte da conclusão desejada até alcançar um fato; depois confirma a cadeia.",
+      "options": [
+        "A, B, C, D",
+        "C, A, D, B",
+        "A, D",
+        "D, C, B, A"
+      ],
+      "kind": "Execução de algoritmo"
+    },
+    {
+      "id": 77,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Associe Forward e Backward ao ponto de partida.",
+      "answer": "Forward: fatos; Backward: hipótese/meta.",
+      "explanation": "Um explora consequências, outro procura provas de uma consulta.",
+      "options": [
+        "Forward: fatos; Backward: hipótese/meta."
+      ],
+      "kind": "Associação"
+    },
+    {
+      "id": 78,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Rex é cachorro; cachorro é animal. Qual inferência?",
+      "answer": "Rex é animal",
+      "explanation": "A hierarquia permite herança.",
+      "options": [
+        "Rex é professor",
+        "Nenhum cachorro é animal",
+        "Todo animal é Rex",
+        "Rex é animal"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 79,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Em rede semântica, o que representam nós e ligações?",
+      "answer": "Nós: conceitos/entidades; ligações: relações.",
+      "explanation": "A semântica das ligações define o significado do grafo.",
+      "options": [
+        "Nós: conceitos/entidades; ligações: relações."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 80,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Uma ficha Aluno com nome, idade, curso e período exemplifica qual técnica?",
+      "answer": "Frame",
+      "explanation": "Frames organizam objetos ou situações em atributos.",
+      "options": [
+        "Frame",
+        "Lista fechada",
+        "Função heurística",
+        "BFS"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 81,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Frame: Liga=SIM e Exibe_Imagem=NÃO. Pela regra da aula, qual possível problema?",
+      "answer": "Memória RAM ou vídeo",
+      "explanation": "É exatamente a conclusão da regra de suporte apresentada.",
+      "options": [
+        "Custo elevado",
+        "Memória RAM ou vídeo",
+        "Aluno reprovado",
+        "Conectividade de rede obrigatoriamente"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 82,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Conecta_Internet=NÃO INFORMADO é igual a Conecta_Internet=NÃO. V ou F?",
+      "answer": "Falso",
+      "explanation": "Ausência de informação não equivale ao valor negativo.",
+      "options": [
+        "Falso",
+        "Verdadeiro"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 83,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "O que uma ontologia define?",
+      "answer": "Conceitos, categorias, propriedades, relações e restrições do domínio.",
+      "explanation": "Pode incluir hierarquia e vocabulário formal.",
+      "options": [
+        "Conceitos, categorias, propriedades, relações e restrições do domínio."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 84,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Notebook é Computador; Computador é Eletrônico. Isso contribui para qual recurso de uma ontologia?",
+      "answer": "Hierarquia de conceitos",
+      "explanation": "Permite relacionar categorias mais específicas e mais gerais.",
+      "options": [
+        "Hierarquia de conceitos",
+        "Custo uniforme",
+        "Backtracking",
+        "Fila LIFO"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 85,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Escreva uma tripla de conhecimento sobre Rafael e Interestelar.",
+      "answer": "Rafael → gostou → Interestelar",
+      "explanation": "Tripla é sujeito, relação e objeto; este exemplo está na aula.",
+      "options": [
+        "Rafael → gostou → Interestelar"
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 86,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Por que A Origem pode ser recomendado após Interestelar no exemplo?",
+      "answer": "Compartilha diretor e gênero no grafo.",
+      "explanation": "As relações fornecem evidência de afinidade, sem garantir preferência.",
+      "options": [
+        "Compartilha diretor e gênero no grafo."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 87,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Qual descrição corresponde à IA simbólica?",
+      "answer": "Conhecimento em símbolos e regras explícitas",
+      "explanation": "A aula contrasta com representações aprendidas pelas redes.",
+      "options": [
+        "Somente fila FIFO",
+        "Somente imagens",
+        "Conhecimento em símbolos e regras explícitas",
+        "Somente pesos aprendidos sem regras explícitas"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 88,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Qual descrição corresponde às redes neurais?",
+      "answer": "Aprendem representações numéricas a partir dos dados",
+      "explanation": "O treinamento ajusta pesos; o conhecimento pode ser distribuído.",
+      "options": [
+        "Aprendem representações numéricas a partir dos dados",
+        "Somente triplas manuais",
+        "Sempre regras escritas por especialista",
+        "Sempre totalmente interpretáveis"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 89,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Qual é a negação de ∀x P(x)?",
+      "answer": "∃x ¬P(x)",
+      "explanation": "Troca ∀ por ∃ e nega o predicado.",
+      "options": [
+        "∃x P(x)",
+        "∃x ¬P(x)",
+        "∀x ¬P(x)",
+        "¬∃x P(x)"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 90,
+      "theme": "Representação do conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39",
+      "prompt": "Regra nota≥6 E frequência≥75% → APROVADO. João(7,80%), Maria(5,90%), Pedro(8,60%): quem satisfaz a regra?",
+      "answer": "João",
+      "explanation": "Maria falha na nota e Pedro na frequência; a regra dada só conclui aprovação.",
+      "options": [
+        "Pedro",
+        "Maria",
+        "Os três",
+        "João"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 91,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "Associe BFS, DFS, Custo Uniforme, Gulosa e A* aos critérios.",
+      "answer": "BFS: FIFO; DFS: LIFO; Custo Uniforme: g; Gulosa: h; A*: g+h.",
+      "explanation": "A seleção do próximo nó define a estratégia.",
+      "options": [
+        "BFS: FIFO; DFS: LIFO; Custo Uniforme: g; Gulosa: h; A*: g+h."
+      ],
+      "kind": "Associação"
+    },
+    {
+      "id": 92,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "Um robô tem um mapa com paredes e deseja chegar a G. Diferencie representação e busca.",
+      "answer": "A representação descreve estados, ações e obstáculos; a busca escolhe uma sequência de ações.",
+      "explanation": "Modelar o problema precede aplicar a estratégia.",
+      "options": [
+        "A representação descreve estados, ações e obstáculos; a busca escolhe uma sequência de ações."
+      ],
+      "kind": "Discursiva curta"
+    },
+    {
+      "id": 93,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "A fronteira possui X(g=9,h=1), Y(g=3,h=5). Quem Gulosa e A* escolhem, respectivamente?",
+      "answer": "X e Y",
+      "explanation": "Gulosa usa h: 1<5. A* usa f: X=10,Y=8.",
+      "options": [
+        "Y e X",
+        "Y e Y",
+        "X e Y",
+        "X e X"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 94,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "A* com h=0 torna-se BFS mesmo com custos de aresta diferentes. V ou F?",
+      "answer": "Falso",
+      "explanation": "Torna-se Custo Uniforme; só sob condições adicionais sua ordem coincide com BFS.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 95,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "A→B e fato B permitem concluir A por lógica apenas. V ou F?",
+      "answer": "Falso",
+      "explanation": "É a inversão indevida da implicação; B pode ter outra causa.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 96,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "No mapa original, o nó (2,2) foi alcançado com g=4. Para G=(4,4), calcule h Manhattan e f.",
+      "answer": "h=4 e f=8",
+      "explanation": "h=2+2=4; f=4+4=8.",
+      "options": [
+        "h=0 e f=4",
+        "h=8 e f=12",
+        "h=4 e f=8",
+        "h=4 e f=4"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 97,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "Um caminho tem 9 posições consecutivas e custo 1 por movimento. Qual custo?",
+      "answer": "8",
+      "explanation": "Entre 9 posições há 8 transições.",
+      "options": [
+        "8",
+        "10",
+        "1",
+        "9"
+      ],
+      "kind": "Cálculo"
+    },
+    {
+      "id": 98,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "Qual técnica combina naturalmente ficha de atributos e regras para diagnóstico de computador?",
+      "answer": "Frames com motor de inferência",
+      "explanation": "O frame guarda sintomas e o motor aplica regras.",
+      "options": [
+        "Somente Manhattan",
+        "Pilha sem atributos",
+        "Frames com motor de inferência",
+        "BFS sem base de fatos"
+      ],
+      "kind": "Múltipla escolha"
+    },
+    {
+      "id": 99,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "P é verdadeiro e Q é falso. Qual o valor de P→Q?",
+      "answer": "Falso",
+      "explanation": "É o único caso falso da implicação.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "kind": "Verdadeiro/falso"
+    },
+    {
+      "id": 100,
+      "theme": "Mistas",
+      "source": "Aulas 03–06; contexto Aula 02",
+      "prompt": "Por que uma heurística útil não substitui o teste de objetivo?",
+      "answer": "Ela estima custo restante; o teste verifica se o estado satisfaz a meta.",
+      "explanation": "Uma estimativa baixa não prova que se chegou ao destino.",
+      "options": [
+        "Ela estima custo restante; o teste verifica se o estado satisfaz a meta."
+      ],
+      "kind": "Discursiva curta"
+    }
+  ],
+  "cards": [
+    {
+      "id": 1,
+      "theme": "Busca não informada",
+      "front": "Em P=(S,s0,A,T,G,C), o que representa S?",
+      "back": "Conjunto de estados possíveis",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 2,
+      "theme": "Busca não informada",
+      "front": "Qual a diferença entre estado e nó?",
+      "back": "Estado é configuração; nó é estrutura do algoritmo.",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 3,
+      "theme": "Busca não informada",
+      "front": "A fronteira contém apenas estados já expandidos. V ou F?",
+      "back": "Falso",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 4,
+      "theme": "Busca não informada",
+      "front": "Qual estrutura define a fronteira da BFS?",
+      "back": "Fila FIFO",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 5,
+      "theme": "Busca não informada",
+      "front": "Qual estrutura define a fronteira da DFS iterativa?",
+      "back": "Pilha LIFO",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 6,
+      "theme": "Busca não informada",
+      "front": "No grafo A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, qual a ordem de seleção BFS até H?",
+      "back": "A,B,C,D,E,F,G,H",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 7,
+      "theme": "Busca não informada",
+      "front": "No mesmo grafo explicitado: A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes. Qual caminho BFS de A até H?",
+      "back": "A→B→E→H",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 8,
+      "theme": "Busca não informada",
+      "front": "Fila BFS [A]; A gera B,C. B é removido e gera D,E. Qual fila resulta, remoção à esquerda?",
+      "back": "C,D,E",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 9,
+      "theme": "Busca não informada",
+      "front": "Pilha DFS [C,B], topo à direita. Remove B e insere E,D. Qual será o próximo removido?",
+      "back": "D",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 10,
+      "theme": "Busca não informada",
+      "front": "DFS em A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, explorando da esquerda para a direita: seleção até H?",
+      "back": "A,B,D,E,H",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 11,
+      "theme": "Busca não informada",
+      "front": "Na pilha vazia, inserir B e depois C faz qual nó sair primeiro?",
+      "back": "C",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 12,
+      "theme": "Busca não informada",
+      "front": "A BFS garante menor custo quando todas as ações têm o mesmo custo positivo. V ou F?",
+      "back": "Verdadeiro",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 13,
+      "theme": "Busca não informada",
+      "front": "DFS sempre encontra o menor caminho. V ou F?",
+      "back": "Falso",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 14,
+      "theme": "Busca não informada",
+      "front": "Por que a DFS pode falhar em espaço infinito?",
+      "back": "Pode seguir um ramo infinito sem explorar a alternativa com solução.",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 15,
+      "theme": "Busca não informada",
+      "front": "O que é backtracking?",
+      "back": "Retornar para explorar uma alternativa pendente.",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 16,
+      "theme": "Busca não informada",
+      "front": "A→B custa 3, B→D custa 4, D→F custa 2. Qual g(F)?",
+      "back": "9",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 17,
+      "theme": "Busca não informada",
+      "front": "No caminho A→B→D→F, qual a profundidade de F?",
+      "back": "3",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 18,
+      "theme": "Busca não informada",
+      "front": "Custo Uniforme escolhe qual valor?",
+      "back": "Menor g(n)",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 19,
+      "theme": "Busca não informada",
+      "front": "A→B→G tem custo 15 em 2 passos; A→C→D→G tem custo 9 em 3 passos. Qual é mais barato?",
+      "back": "A→C→D→G",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 20,
+      "theme": "Busca não informada",
+      "front": "Fronteira de Custo Uniforme: B(g=7), C(g=2), D(g=5). Quem sai?",
+      "back": "C",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 21,
+      "theme": "Busca não informada",
+      "front": "Busca limitada com L=2 encontra necessariamente uma solução na profundidade 3? V ou F?",
+      "back": "Falso",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 22,
+      "theme": "Busca não informada",
+      "front": "Qual sequência de limites caracteriza aprofundamento iterativo?",
+      "back": "0,1,2,3,…",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 23,
+      "theme": "Busca não informada",
+      "front": "O que o aprofundamento iterativo combina?",
+      "back": "Memória da DFS e busca de soluções rasas da BFS",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 24,
+      "theme": "Busca não informada",
+      "front": "O que a busca bidirecional precisa fazer a partir do objetivo?",
+      "back": "Gerar predecessores",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 25,
+      "theme": "Busca não informada",
+      "front": "Para b=3, quantos nós há em um nível completo de profundidade 5?",
+      "back": "243",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 26,
+      "theme": "Busca não informada",
+      "front": "Com b=3, qual o total de nós até a profundidade 5, incluindo a raiz?",
+      "back": "364",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 27,
+      "theme": "Busca não informada",
+      "front": "Associe b, d e m a seus significados.",
+      "back": "b: ramificação; d: profundidade da solução mais próxima; m: profundidade máxima.",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 28,
+      "theme": "Busca não informada",
+      "front": "Como impedir a repetição A→B→C→A em busca em grafo?",
+      "back": "Registrar estados explorados e controlar repetições.",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 29,
+      "theme": "Busca não informada",
+      "front": "Por que sequência de visitas não é necessariamente caminho da solução?",
+      "back": "Visitas podem pertencer a ramos diferentes e não ter arestas entre si.",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 30,
+      "theme": "Busca não informada",
+      "front": "Na atividade A:[B,C], B:[D,E], C:[F], D:[G], E:[G,H], F:[H], G:[I], H:[I], I:[], qual caminho BFS até I, vizinhos na ordem dada?",
+      "back": "A→B→D→G→I",
+      "source": "Aula 05, p. 2–37"
+    },
+    {
+      "id": 31,
+      "theme": "Busca não informada",
+      "front": "O que faz T?",
+      "back": "Descreve a transição / sucessores.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 32,
+      "theme": "Busca não informada",
+      "front": "O que faz G?",
+      "back": "Testa se o estado é objetivo.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 33,
+      "theme": "Busca não informada",
+      "front": "O que faz C?",
+      "back": "Atribui custo às ações/caminhos.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 34,
+      "theme": "Busca não informada",
+      "front": "Profundidade inicial?",
+      "back": "Zero.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 35,
+      "theme": "Busca não informada",
+      "front": "Como reconstruir um caminho?",
+      "back": "Siga pais e inverta a sequência.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 36,
+      "theme": "Busca não informada",
+      "front": "Busca em árvore pode repetir estado?",
+      "back": "Sim, em caminhos diferentes.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 37,
+      "theme": "Busca não informada",
+      "front": "Completude significa?",
+      "back": "Encontrar solução quando existe, sob condições.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 38,
+      "theme": "Busca não informada",
+      "front": "Otimalidade significa?",
+      "back": "Encontrar solução de menor custo.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 39,
+      "theme": "Busca não informada",
+      "front": "DFS recursiva usa qual memória?",
+      "back": "A pilha de chamadas.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 40,
+      "theme": "Busca não informada",
+      "front": "Limite L pode excluir solução?",
+      "back": "Sim, se a solução estiver além de L.",
+      "source": "Aula 05"
+    },
+    {
+      "id": 41,
+      "theme": "Busca informada",
+      "front": "O que representa h(n)?",
+      "back": "Estimativa do custo restante até o objetivo",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 42,
+      "theme": "Busca informada",
+      "front": "Qual é a prioridade da Busca Gulosa?",
+      "back": "Menor h(n)",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 43,
+      "theme": "Busca informada",
+      "front": "Qual é a função de avaliação de A*?",
+      "back": "f(n)=g(n)+h(n)",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 44,
+      "theme": "Busca informada",
+      "front": "Se g=4 e h=7, qual f?",
+      "back": "11",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 45,
+      "theme": "Busca informada",
+      "front": "Se f=15 e g=6, qual h?",
+      "back": "9",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 46,
+      "theme": "Busca informada",
+      "front": "Se g do pai é 3 e a aresta custa 5, qual g do sucessor?",
+      "back": "8",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 47,
+      "theme": "Busca informada",
+      "front": "Manhattan de (2,3) até (7,6)?",
+      "back": "8",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 48,
+      "theme": "Busca informada",
+      "front": "Manhattan de (0,0) até (4,4)?",
+      "back": "8",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 49,
+      "theme": "Busca informada",
+      "front": "Manhattan de (3,4) até (1,1)?",
+      "back": "5",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 50,
+      "theme": "Busca informada",
+      "front": "Manhattan de (−2,1) até (3,−3)?",
+      "back": "9",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 51,
+      "theme": "Busca informada",
+      "front": "Euclidiana de (0,0) até (3,4)?",
+      "back": "5",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 52,
+      "theme": "Busca informada",
+      "front": "Euclidiana de (2,3) até (7,6)?",
+      "back": "√34 ≈ 5,83",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 53,
+      "theme": "Busca informada",
+      "front": "Gulosa tem B(h=5) e C(h=7) na fronteira. Qual seleciona?",
+      "back": "B",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 54,
+      "theme": "Busca informada",
+      "front": "A* tem B(g=2,h=6), C(g=4,h=5) e E(g=4,h=4). Com empate por descoberta e B descoberto primeiro, quem sai?",
+      "back": "B",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 55,
+      "theme": "Busca informada",
+      "front": "No grafo da aula: A–B=2,A–C=4,B–D=5,B–E=2,C–E=1,C–F=5,D–G=3,E–G=6,F–G=4; h(B,C,D,E,F,G)=(6,5,2,4,4,0). Gulosa, E antes de F no empate, segue qual solução?",
+      "back": "A→C→E→G, custo 11",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 56,
+      "theme": "Busca informada",
+      "front": "O que é lista aberta no A*?",
+      "back": "Nós descobertos ainda não expandidos, priorizados por f",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 57,
+      "theme": "Busca informada",
+      "front": "O que é lista fechada no A*?",
+      "back": "Estados já expandidos",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 58,
+      "theme": "Busca informada",
+      "front": "Se h*=10, qual valor viola admissibilidade nesse estado?",
+      "back": "14",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 59,
+      "theme": "Busca informada",
+      "front": "Se h*=10 e h=7, a condição de admissibilidade vale nesse estado. V ou F?",
+      "back": "Verdadeiro",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 60,
+      "theme": "Busca informada",
+      "front": "Com h(n)=7, c=3 e h(n′)=4, a consistência vale nessa aresta?",
+      "back": "Sim, pois 7≤3+4",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 61,
+      "theme": "Busca informada",
+      "front": "Com h(n)=8, c=3 e h(n′)=4, a consistência vale nessa aresta?",
+      "back": "Não, pois 8>3+4",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 62,
+      "theme": "Busca informada",
+      "front": "Toda heurística consistente é admissível nas condições usuais com h(objetivo)=0. V ou F?",
+      "back": "Verdadeiro",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 63,
+      "theme": "Busca informada",
+      "front": "Se h(n)=0 para todo n, A* equivale a qual busca?",
+      "back": "Busca de Custo Uniforme",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 64,
+      "theme": "Busca informada",
+      "front": "Uma heurística que superestima sempre mantém a garantia de ótimo do A*. V ou F?",
+      "back": "Falso",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 65,
+      "theme": "Busca informada",
+      "front": "Qual pior caso de tempo é apresentado para Gulosa na aula?",
+      "back": "O(b^m)",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 66,
+      "theme": "Busca informada",
+      "front": "Qual pior caso de tempo é apresentado para A* na aula?",
+      "back": "O(b^d)",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 67,
+      "theme": "Busca informada",
+      "front": "Na grade original da professora, S=(0,0), G=(4,4). Qual h(S) Manhattan?",
+      "back": "8",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 68,
+      "theme": "Busca informada",
+      "front": "Mapa S..#./##.#./...../.###./....G, quatro movimentos de custo 1: qual custo ótimo?",
+      "back": "8",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 69,
+      "theme": "Busca informada",
+      "front": "No mapa S..#./##.#./...../.###./....G, bloquear também (2,3) faz o custo ótimo ser quanto?",
+      "back": "12",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 70,
+      "theme": "Busca informada",
+      "front": "Associe g, h e f às três perguntas de A*.",
+      "back": "g: quanto gastei; h: quanto falta estimado; f: total estimado.",
+      "source": "Aula 06, p. 2–23"
+    },
+    {
+      "id": 71,
+      "theme": "Busca informada",
+      "front": "Heurística para 8 peças no slide?",
+      "back": "Número de peças fora do lugar.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 72,
+      "theme": "Busca informada",
+      "front": "Heurística para rotas?",
+      "back": "Distância em linha reta.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 73,
+      "theme": "Busca informada",
+      "front": "h no objetivo, na convenção usual?",
+      "back": "Zero.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 74,
+      "theme": "Busca informada",
+      "front": "Euclidiana entre (1,1) e (1,6)?",
+      "back": "5.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 75,
+      "theme": "Busca informada",
+      "front": "Manhattan entre posições iguais?",
+      "back": "0.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 76,
+      "theme": "Busca informada",
+      "front": "Se g=8 e h=4, f=?",
+      "back": "12.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 77,
+      "theme": "Busca informada",
+      "front": "Se h supera h*, qual propriedade falha?",
+      "back": "Admissibilidade.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 78,
+      "theme": "Busca informada",
+      "front": "Consistência precisa valer onde?",
+      "back": "Em toda transição.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 79,
+      "theme": "Busca informada",
+      "front": "A* pode gastar muita memória?",
+      "back": "Sim, guarda estados descobertos.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 80,
+      "theme": "Busca informada",
+      "front": "Heurística de planejamento citada?",
+      "back": "Tempo restante estimado.",
+      "source": "Aula 06"
+    },
+    {
+      "id": 81,
+      "theme": "Representação do conhecimento",
+      "front": "38,5 sem contexto corresponde a quê no exemplo da aula?",
+      "back": "Dado",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 82,
+      "theme": "Representação do conhecimento",
+      "front": "Temperatura = 38,5 °C corresponde a quê?",
+      "back": "Informação",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 83,
+      "theme": "Representação do conhecimento",
+      "front": "Temperatura acima de 38 °C pode indicar febre é exemplo de quê?",
+      "back": "Conhecimento",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 84,
+      "theme": "Representação do conhecimento",
+      "front": "Carlos tem nota 4,5; se nota<6, então abaixo da média. Concluir que Carlos está abaixo da média é o quê?",
+      "back": "Inferência",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 85,
+      "theme": "Representação do conhecimento",
+      "front": "Quais componentes a base de conhecimento armazena?",
+      "back": "Fatos, regras, relações, conceitos e propriedades.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 86,
+      "theme": "Representação do conhecimento",
+      "front": "Manaus está localizada no Amazonas é conhecimento de qual tipo?",
+      "back": "Declarativo",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 87,
+      "theme": "Representação do conhecimento",
+      "front": "Somar notas e dividir pela quantidade descreve conhecimento de qual tipo?",
+      "back": "Procedural",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 88,
+      "theme": "Representação do conhecimento",
+      "front": "Em idade(João,25), identifique entidade, propriedade e valor.",
+      "back": "Entidade João; propriedade idade; valor 25.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 89,
+      "theme": "Representação do conhecimento",
+      "front": "Humano(Sócrates) e ∀x(Humano(x)→Mortal(x)) permitem concluir o quê?",
+      "back": "Mortal(Sócrates)",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 90,
+      "theme": "Representação do conhecimento",
+      "front": "Aluno(Maria) é um exemplo de quê?",
+      "back": "Predicado de propriedade",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 91,
+      "theme": "Representação do conhecimento",
+      "front": "Pai(José,Carlos) equivale a Pai(Carlos,José). V ou F?",
+      "back": "Falso",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 92,
+      "theme": "Representação do conhecimento",
+      "front": "Qual estrutura caracteriza uma regra de produção?",
+      "back": "SE condição ENTÃO conclusão ou ação",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 93,
+      "theme": "Representação do conhecimento",
+      "front": "Qual é a função do motor de inferência?",
+      "back": "Aplicar regras aos fatos para gerar conclusões.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 94,
+      "theme": "Representação do conhecimento",
+      "front": "Para que serve a memória de trabalho?",
+      "back": "Guardar fatos do caso e resultados intermediários.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 95,
+      "theme": "Representação do conhecimento",
+      "front": "Fato A e regras A→B, B→C, C→D. Qual sequência forward?",
+      "back": "A→B→C→D",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 96,
+      "theme": "Representação do conhecimento",
+      "front": "Para provar D com A→B, B→C, C→D e fato A, qual é a sequência de submetas backward?",
+      "back": "D, C, B, A",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 97,
+      "theme": "Representação do conhecimento",
+      "front": "Associe Forward e Backward ao ponto de partida.",
+      "back": "Forward: fatos; Backward: hipótese/meta.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 98,
+      "theme": "Representação do conhecimento",
+      "front": "Rex é cachorro; cachorro é animal. Qual inferência?",
+      "back": "Rex é animal",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 99,
+      "theme": "Representação do conhecimento",
+      "front": "Em rede semântica, o que representam nós e ligações?",
+      "back": "Nós: conceitos/entidades; ligações: relações.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 100,
+      "theme": "Representação do conhecimento",
+      "front": "Uma ficha Aluno com nome, idade, curso e período exemplifica qual técnica?",
+      "back": "Frame",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 101,
+      "theme": "Representação do conhecimento",
+      "front": "Frame: Liga=SIM e Exibe_Imagem=NÃO. Pela regra da aula, qual possível problema?",
+      "back": "Memória RAM ou vídeo",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 102,
+      "theme": "Representação do conhecimento",
+      "front": "Conecta_Internet=NÃO INFORMADO é igual a Conecta_Internet=NÃO. V ou F?",
+      "back": "Falso",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 103,
+      "theme": "Representação do conhecimento",
+      "front": "O que uma ontologia define?",
+      "back": "Conceitos, categorias, propriedades, relações e restrições do domínio.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 104,
+      "theme": "Representação do conhecimento",
+      "front": "Notebook é Computador; Computador é Eletrônico. Isso contribui para qual recurso de uma ontologia?",
+      "back": "Hierarquia de conceitos",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 105,
+      "theme": "Representação do conhecimento",
+      "front": "Escreva uma tripla de conhecimento sobre Rafael e Interestelar.",
+      "back": "Rafael → gostou → Interestelar",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 106,
+      "theme": "Representação do conhecimento",
+      "front": "Por que A Origem pode ser recomendado após Interestelar no exemplo?",
+      "back": "Compartilha diretor e gênero no grafo.",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 107,
+      "theme": "Representação do conhecimento",
+      "front": "Qual descrição corresponde à IA simbólica?",
+      "back": "Conhecimento em símbolos e regras explícitas",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 108,
+      "theme": "Representação do conhecimento",
+      "front": "Qual descrição corresponde às redes neurais?",
+      "back": "Aprendem representações numéricas a partir dos dados",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 109,
+      "theme": "Representação do conhecimento",
+      "front": "Qual é a negação de ∀x P(x)?",
+      "back": "∃x ¬P(x)",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 110,
+      "theme": "Representação do conhecimento",
+      "front": "Regra nota≥6 E frequência≥75% → APROVADO. João(7,80%), Maria(5,90%), Pedro(8,60%): quem satisfaz a regra?",
+      "back": "João",
+      "source": "Aula 03, p. 2–44; Aula 04, p. 6–39"
+    },
+    {
+      "id": 111,
+      "theme": "Representação do conhecimento",
+      "front": "Negação de ∃x P(x)?",
+      "back": "∀x ¬P(x).",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 112,
+      "theme": "Representação do conhecimento",
+      "front": "João em Aluno(João) é quê?",
+      "back": "Constante.",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 113,
+      "theme": "Representação do conhecimento",
+      "front": "x em Aluno(x) é quê?",
+      "back": "Variável.",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 114,
+      "theme": "Representação do conhecimento",
+      "front": "∀ significa?",
+      "back": "Para todo.",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 115,
+      "theme": "Representação do conhecimento",
+      "front": "∃ significa?",
+      "back": "Existe pelo menos um.",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 116,
+      "theme": "Representação do conhecimento",
+      "front": "P→Q equivale a quê?",
+      "back": "¬P∨Q.",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 117,
+      "theme": "Representação do conhecimento",
+      "front": "Negação de P∧Q?",
+      "back": "¬P∨¬Q.",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 118,
+      "theme": "Representação do conhecimento",
+      "front": "Representação de todo aluno estuda?",
+      "back": "∀x(Aluno(x)→Estuda(x)).",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 119,
+      "theme": "Representação do conhecimento",
+      "front": "Representação de algum aluno estuda?",
+      "back": "∃x(Aluno(x)∧Estuda(x)).",
+      "source": "Aulas 03 e 04"
+    },
+    {
+      "id": 120,
+      "theme": "Representação do conhecimento",
+      "front": "Neuro-simbólica combina o quê?",
+      "back": "Redes neurais e IA simbólica.",
+      "source": "Aulas 03 e 04"
+    }
+  ]
+}

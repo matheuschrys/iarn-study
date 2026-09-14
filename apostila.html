@@ -1,0 +1,1784 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Apostila completa · IARN</title><link rel="stylesheet" href="assets/estilo.css"></head><body><main><div class="toolbar"><a href="index.html">← Site de estudo</a><button onclick="window.print()">Imprimir / Salvar como PDF</button></div><article class="article"><h1>IARN — Aprender, praticar e revisar</h1>
+<p>Material de estudo baseado nas seis aulas de Josiane Sandes. Prioridades: Busca Não Informada (Aula 05), Busca Heurística (Aula 06) e Representação do Conhecimento (Aula 03). Aula 04 apoia a lógica; Aulas 01 e 02 dão contexto. As referências usam a página do PDF, contando a capa. Exercícios e execuções são elaboração didática; complementos que ultrapassam os slides estão marcados.</p>
+<h2>1. Fundamentos de busca</h2>
+<p>Fonte: Aula 05, p. 2–17 e 35–36; contexto: Aula 02, p. 30.</p>
+<p>Resolver um problema por busca é encontrar uma sequência de ações que transforme uma configuração inicial em uma configuração desejada. Um agente baseado em objetivos compara possibilidades antes de agir: o robô deve descobrir como sair da sala A e chegar à F.</p>
+<h3>Formular antes de buscar</h3>
+<p><strong>P = (S, s0, A, T, G, C)</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Significado</th>
+<th>Exemplo de labirinto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>Conjunto de estados possíveis</td>
+<td>Posições livres</td>
+</tr>
+<tr>
+<td>s0</td>
+<td>Estado inicial; s0 ∈ S</td>
+<td>Posição do robô</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Ações ou operadores disponíveis</td>
+<td>Cima, baixo, esquerda, direita</td>
+</tr>
+<tr>
+<td>T</td>
+<td>Modelo de transição / função sucessora</td>
+<td>Resultado de um movimento permitido</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Teste ou conjunto de estados objetivos</td>
+<td>Verificar se chegou ao destino</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Função de custo</td>
+<td>1 por movimento</td>
+</tr>
+</tbody></table></div>
+<p>Nem toda ação é permitida em qualquer estado: atravessar uma parede não é sucessor válido. O <strong>modelo de transição</strong> descreve o resultado de uma ação; a <strong>função sucessora</strong> reúne os sucessores alcançáveis pelas ações disponíveis. <strong>Operador</strong> é uma operação que muda o estado. O espaço de estados alcançáveis pode ser desenhado como grafo: vértices são estados, arestas são transições, pesos são custos.</p>
+<p><strong>ESTADO ≠ NÓ.</strong> Estado é uma configuração do problema; nó é uma estrutura do algoritmo, que pode guardar estado, pai, ação, profundidade e custo. Dois caminhos podem chegar ao mesmo estado e gerar nós com pais e custos diferentes. Caminho é uma sequência conectada de estados ou ações; profundidade é a quantidade de passos desde o início. Custo é a soma dos pesos: A→B=3, B→D=4, D→F=2 resulta em g(F)=9 e profundidade 3 (Aula 05, p. 9).</p>
+<p>O teste de objetivo só responde se a configuração desejada foi alcançada. Encontrar uma solução não significa encontrar a melhor: isso depende da estratégia e dos custos. Para reconstruir a solução, siga os pais do objetivo até o início e inverta a sequência.</p>
+<h3>Fronteira e ciclo de busca</h3>
+<p>A fronteira guarda <strong>nós descobertos ainda não expandidos</strong>, representando estados à espera de análise. Expandir significa gerar e processar sucessores. Os estados explorados registram expansões anteriores.</p>
+<ol>
+<li>Insira o nó inicial na fronteira.</li>
+<li>Selecione e remova um nó.</li>
+<li>Teste o objetivo; se verdadeiro, reconstrua o caminho.</li>
+<li>Registre a expansão e gere os sucessores válidos.</li>
+<li>Insira os sucessores conforme a política da busca.</li>
+<li>Repita; fronteira vazia sem objetivo significa falha.</li>
+</ol>
+<p><strong>A forma de escolher o próximo nó da fronteira define a estratégia de busca.</strong></p>
+<p>Convenção deste material: testamos o objetivo ao retirar o nó. A sequência de selecionados inclui o objetivo; a lista de expandidos não o inclui, pois paramos antes de gerar seus sucessores. Isso evita confundir “visita” com “expansão”.</p>
+<h3>Árvore × grafo</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Busca em árvore</th>
+<th>Busca em grafo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Representa caminhos; um estado pode reaparecer</td>
+<td>Mantém registro dos estados explorados</td>
+</tr>
+<tr>
+<td>Não precisa guardar todos os visitados</td>
+<td>Evita processamento repetido conforme a política</td>
+</tr>
+<tr>
+<td>Pode gerar repetições e ciclos</td>
+<td>Reduz ciclos e repetições</td>
+</tr>
+<tr>
+<td>Estrutura mais simples</td>
+<td>Registro adicional consome memória</td>
+</tr>
+</tbody></table></div>
+<p>Exemplo elaborado: A→B→C→A. Sem controle, uma DFS pode repetir A,B,C para sempre. Com explorados, o retorno a A é descartado. Em A→B→D e A→C→D, o mesmo estado D aparece em dois caminhos: busca em árvore pode manter ambos.</p>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — Conferir também estados já presentes na fronteira evita duplicatas pendentes. Em buscas por custo, não basta descartar toda repetição: um novo caminho pode ser mais barato e exigir atualização. A implementação do site usa essas políticas explicitamente.</p>
+</blockquote>
+<h3>Critérios de avaliação</h3>
+<p><strong>Completude:</strong> encontra solução quando existe? <strong>Otimalidade:</strong> encontra a de menor custo? <strong>Tempo:</strong> quantos nós gera/processa? <strong>Espaço:</strong> quantos precisa guardar? Não confunda rapidez observada em um exemplo com garantia geral.</p>
+<h2>2. Busca não informada</h2>
+<p>Fonte: Aula 05, p. 16–37.</p>
+<p>Usa estado inicial, ações, sucessores, teste de objetivo e custos quando aplicáveis. Não usa estimativa de proximidade ao destino. Também aparece como busca cega ou sem informação heurística. Custo uniforme continua não informada: g mede gasto real passado, não estima o restante.</p>
+<h3>BFS — Breadth-First Search</h3>
+<p>Busca em largura expande os nós de <strong>menor profundidade</strong> primeiro: nível 0, nível 1, nível 2… Sua fronteira é uma <strong>fila FIFO: First In, First Out</strong>, primeiro a entrar, primeiro a sair.</p>
+<p>Exemplo da Aula 05, p. 20: A→[B,C]; B→[D,E]; C→[F,G]; E→[H]. D,F,G,H não têm sucessores. Início A, objetivo H, custos 1. A fila é mostrada com a remoção à esquerda.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Nó removido</th>
+<th>Sucessores inseridos</th>
+<th>Fila depois</th>
+<th>Expandidos</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>—</td>
+<td>A</td>
+<td>A</td>
+<td>∅</td>
+</tr>
+<tr>
+<td>1</td>
+<td>A</td>
+<td>B,C</td>
+<td>B,C</td>
+<td>A</td>
+</tr>
+<tr>
+<td>2</td>
+<td>B</td>
+<td>D,E</td>
+<td>C,D,E</td>
+<td>A,B</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C</td>
+<td>F,G</td>
+<td>D,E,F,G</td>
+<td>A,B,C</td>
+</tr>
+<tr>
+<td>4</td>
+<td>D</td>
+<td>nenhum</td>
+<td>E,F,G</td>
+<td>A,B,C,D</td>
+</tr>
+<tr>
+<td>5</td>
+<td>E</td>
+<td>H</td>
+<td>F,G,H</td>
+<td>A,B,C,D,E</td>
+</tr>
+<tr>
+<td>6</td>
+<td>F</td>
+<td>nenhum</td>
+<td>G,H</td>
+<td>A,B,C,D,E,F</td>
+</tr>
+<tr>
+<td>7</td>
+<td>G</td>
+<td>nenhum</td>
+<td>H</td>
+<td>A,B,C,D,E,F,G</td>
+</tr>
+<tr>
+<td>8</td>
+<td>H, objetivo</td>
+<td>nenhum</td>
+<td>∅</td>
+<td>A,B,C,D,E,F,G</td>
+</tr>
+</tbody></table></div>
+<p>Selecionados: A,B,C,D,E,F,G,H. Expansões efetivas: A,B,C,D,E,F,G. <strong>Caminho da solução: A→B→E→H</strong>, custo 3. A ordem de busca não é caminho: B e C, por exemplo, não estão ligados entre si nesse grafo.</p>
+<p>BFS é completa com ramificação finita e solução em profundidade finita. Encontra a solução mais rasa; com custos iguais, isso também minimiza o custo. A memória pode crescer muito, pois guarda muitos nós do mesmo nível. É boa quando a solução está próxima.</p>
+<h3>DFS — Depth-First Search</h3>
+<p>Busca em profundidade explora um ramo antes de voltar às alternativas. Usa <strong>pilha LIFO: Last In, First Out</strong>, último a entrar, primeiro a sair. Pode ser iterativa com pilha explícita ou recursiva com pilha de chamadas.</p>
+<p>No mesmo grafo, queremos visitar sucessores da esquerda para a direita. Portanto, empilhamos em ordem inversa. O topo está à direita.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Nó removido</th>
+<th>Inseridos na pilha</th>
+<th>Pilha depois</th>
+<th>Expandidos</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>—</td>
+<td>A</td>
+<td>A</td>
+<td>∅</td>
+</tr>
+<tr>
+<td>1</td>
+<td>A</td>
+<td>C,B</td>
+<td>C,B</td>
+<td>A</td>
+</tr>
+<tr>
+<td>2</td>
+<td>B</td>
+<td>E,D</td>
+<td>C,E,D</td>
+<td>A,B</td>
+</tr>
+<tr>
+<td>3</td>
+<td>D</td>
+<td>nenhum</td>
+<td>C,E</td>
+<td>A,B,D</td>
+</tr>
+<tr>
+<td>4</td>
+<td>E</td>
+<td>H</td>
+<td>C,H</td>
+<td>A,B,D,E</td>
+</tr>
+<tr>
+<td>5</td>
+<td>H, objetivo</td>
+<td>nenhum</td>
+<td>C</td>
+<td>A,B,D,E</td>
+</tr>
+</tbody></table></div>
+<p>Depois de D, a busca retorna à alternativa E: é o <strong>backtracking</strong>. Selecionados: A,B,D,E,H. Caminho: A→B→E→H, custo 3. C permanece pendente quando o objetivo é encontrado. Se B for empilhado antes de C, C sairá primeiro e a ordem mudará.</p>
+<p>DFS não garante caminho mais curto nem menor custo. Pode seguir ramos muito profundos e não é completa em espaços infinitos. É útil quando a memória é limitada, há muitas soluções ou a profundidade é controlada. Em grafo finito, controlar visitados permite esgotar os estados alcançáveis.</p>
+<h3>BFS × DFS</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Critério</th>
+<th>BFS</th>
+<th>DFS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Estrutura</td>
+<td>Fila FIFO</td>
+<td>Pilha LIFO</td>
+</tr>
+<tr>
+<td>Escolha</td>
+<td>Menor profundidade</td>
+<td>Ramo atual / último inserido</td>
+</tr>
+<tr>
+<td>Completude</td>
+<td>Sim, sob condições acima</td>
+<td>Não em geral em espaço infinito</td>
+</tr>
+<tr>
+<td>Otimalidade</td>
+<td>Custos iguais</td>
+<td>Não</td>
+</tr>
+<tr>
+<td>Memória usual</td>
+<td>Alta</td>
+<td>Menor na busca em árvore</td>
+</tr>
+<tr>
+<td>Menor caminho em passos</td>
+<td>Sim</td>
+<td>Não garante</td>
+</tr>
+<tr>
+<td>Caminhos infinitos</td>
+<td>Não fica só em um ramo, com b finito</td>
+<td>Pode ficar presa em um ramo</td>
+</tr>
+<tr>
+<td>Indicação</td>
+<td>Solução rasa</td>
+<td>Memória limitada e profundidade controlada</td>
+</tr>
+</tbody></table></div>
+<p><strong>A escolha do próximo nó da fronteira define a estratégia.</strong> Não é a aparência do desenho que torna uma busca BFS ou DFS.</p>
+<h3>Complexidade e crescimento</h3>
+<p>b é o fator de ramificação: quantidade de sucessores, tratada no slide como média. d é a profundidade da solução mais próxima. m é a profundidade máxima. Com b=3, no nível 5 há 3^5=243 nós; até esse nível há 1+3+9+27+81+243=364.</p>
+<p>Tabela <strong>como impressa na Aula 05, p. 29</strong>:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Estratégia</th>
+<th>Tempo</th>
+<th>Espaço</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BFS</td>
+<td>O(b^d)</td>
+<td>O(b^d)</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>O(b^m)</td>
+<td>O(b^m)</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — Na análise usual de DFS em árvore, mantendo o ramo atual e irmãos pendentes, a memória é O(b·m), enquanto o tempo pode ser O(b^m). Se forem guardados todos os estados visitados, essa memória adicional pode chegar a O(V), com V estados distintos. A tabela do slide não distingue essas implementações. Os limites exponenciais de BFS também variam com o momento do teste do objetivo e a contagem de nós gerados; aqui preservamos a convenção da aula. Para garantias de pior caso, b é considerado um limite de ramificação.</p>
+</blockquote>
+<h3>Busca de Custo Uniforme</h3>
+<p>Escolhe o nó com <strong>menor g(n)</strong> em fila de prioridade. g(n) é o custo acumulado desde o início. Menos passos não significa menor custo: no slide, A→B→G tem 2 passos e custo 15; A→C→D→G tem 3 passos e custo 9. BFS prefere o primeiro por profundidade; custo uniforme encontra o segundo.</p>
+<p>Exemplo numérico elaborado: A→B=7, B→G=8; A→C=2, C→D=3, D→G=4. Depois de expandir A: C(2),B(7). Depois de C: D(5),B(7). Depois de D: B(7),G(9). Depois de B, a alternativa G(15) não melhora G(9). Retira G(9) e termina. Solução A→C→D→G, custo 9.</p>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — O teste ao remover da prioridade evita aceitar um objetivo caro apenas porque foi gerado cedo. Em espaços infinitos, completude e otimalidade usuais de custo uniforme exigem ramificação finita e custos de passo ≥ ε&gt;0. Em grafos finitos, custos não negativos e tratamento correto de melhorias bastam para o problema usual de menor caminho.</p>
+</blockquote>
+<h3>Profundidade limitada</h3>
+<p>Executa DFS respeitando profundidade ≤ L. Ao alcançar L sem objetivo, não gera descendentes. Evita seguir indefinidamente um ramo, mas pode perder solução além do limite. Exemplo: solução na profundidade 3; L=2 não a encontra.</p>
+<h3>Aprofundamento iterativo</h3>
+<p>Repete busca limitada com L=0,1,2,3… Recomeça a cada limite. Combina memória da DFS com a capacidade de encontrar solução rasa da BFS. Com ramificação finita, solução em profundidade finita e custos iguais, é completo e ótimo. Repetir trabalho dos níveis superiores é a troca por menor memória.</p>
+<h3>Busca bidirecional</h3>
+<p>Uma busca parte do início e outra do objetivo; elas se encontram. A Aula 05, p. 34, apresenta redução aproximada de O(b^d) para O(b^(d/2)) em condições apropriadas. É preciso gerar predecessores a partir do objetivo. Exemplo elaborado: A→B→C→D→G; a busca de A chega a C, a busca inversa de G também chega a C; os trechos são unidos.</p>
+<h3>Atividade de rotas da professora</h3>
+<p>Aula 05, p. 37: A:[B,C]; B:[D,E]; C:[F]; D:[G]; E:[G,H]; F:[H]; G:[I]; H:[I]; I:[]. As arestas são dirigidas. Desenhe, execute BFS e DFS, registre visitas, caminho e número de estados, e compare.</p>
+<p>Exemplo resolvido com início A e objetivo I, vizinhos na ordem dada e sem duplicatas na fronteira: BFS seleciona A,B,C,D,E,F,G,H,I e retorna A→B→D→G→I (4 passos). DFS seleciona A,B,D,G,I e retorna o mesmo caminho. Terem coincidido aqui não dá garantia geral à DFS. O site inclui esse cenário.</p>
+<h2>3. Busca informada e heurística</h2>
+<p>Fonte: Aula 06, p. 2–12.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Não informada</th>
+<th>Informada</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Estrutura do problema</td>
+<td>Estrutura + estimativa</td>
+</tr>
+<tr>
+<td>Sem estimativa de proximidade</td>
+<td>Orientação por heurística</td>
+</tr>
+<tr>
+<td>BFS, DFS, Custo Uniforme (Dijkstra na Aula 06)</td>
+<td>Gulosa e A*</td>
+</tr>
+<tr>
+<td>Pode explorar muitos estados</td>
+<td>Pode reduzir exploração</td>
+</tr>
+</tbody></table></div>
+<p><strong>h(n)</strong> estima o custo de n até o objetivo. n representa o estado associado ao nó; h mede o restante estimado. <strong>Heurística ≠ custo real.</strong> Não precisa ser exata, mas deve orientar a busca de forma útil.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Problema da aula</th>
+<th>Heurística possível</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rotas</td>
+<td>Distância em linha reta</td>
+</tr>
+<tr>
+<td>Labirinto</td>
+<td>Manhattan</td>
+</tr>
+<tr>
+<td>Quebra-cabeça de 8 peças</td>
+<td>Número de peças fora do lugar</td>
+</tr>
+<tr>
+<td>Jogos</td>
+<td>Avaliação da posição</td>
+</tr>
+<tr>
+<td>Robótica</td>
+<td>Distância ao destino</td>
+</tr>
+<tr>
+<td>Planejamento</td>
+<td>Tempo restante estimado</td>
+</tr>
+</tbody></table></div>
+<p>A tabela de cidades da Aula 06, p. 5, diferencia estimativas de distâncias reais de estrada. São valores didáticos do slide, não consultas atuais de rotas.</p>
+<h3>Manhattan</h3>
+<p><strong>h(n) = |xn−xo| + |yn−yo|</strong>. (xn,yn) é a posição atual e (xo,yo) é o objetivo. Some os deslocamentos absolutos em cada eixo. É natural para movimento horizontal e vertical.</p>
+<p>Exemplo da aula: (2,3) até (7,6): |2−7|+|3−6|=5+3=<strong>8</strong>.</p>
+<p>Exemplos elaborados: (0,0)→(4,4): 4+4=8; (3,4)→(1,1): 2+3=5; (−2,1)→(3,−3): 5+4=9; (5,2)→(5,2): 0.</p>
+<h3>Euclidiana</h3>
+<p><strong>h(n) = √((xn−xo)² + (yn−yo)²)</strong>. Mede a linha reta e é adequada a deslocamentos em diferentes direções.</p>
+<p>Exemplo da aula: (2,3)→(7,6): √(25+9)=√34≈<strong>5,83</strong>. Exemplos elaborados: (0,0)→(3,4): √25=5; (1,1)→(1,6): 5; (0,0)→(1,1): √2≈1,41.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Comparação</th>
+<th>Manhattan</th>
+<th>Euclidiana</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Operação</td>
+<td>Soma dos módulos</td>
+<td>Raiz da soma dos quadrados</td>
+</tr>
+<tr>
+<td>(0,0)→(3,4)</td>
+<td>7</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Intuição</td>
+<td>Quarteirões</td>
+<td>Linha reta</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — Na grade de quatro movimentos com custo 1, Manhattan é admissível e consistente: paredes podem alongar a rota, e um movimento muda a distância em no máximo 1. Se diagonais custarem 1, Manhattan pode superestimar; escolher a fórmula exige considerar ações e unidades de custo. Euclidiana em unidades de distância não estima automaticamente um custo medido em tempo.</p>
+</blockquote>
+<h3>Busca Gulosa</h3>
+<p>Escolhe <strong>menor h(n)</strong>, ignorando g na prioridade. Pode parecer perto do objetivo e já ter gasto muito. Na tabela da Aula 06, p. 9: B tem h=5 e C tem h=7; escolhe B. O caminho A→B→D→G custa 4+5+4=13; A→C→D→G custa 2+3+4=9. Gulosa não garante menor custo.</p>
+<h3>Grafo da Aula 06, p. 11 e 16</h3>
+<p>Este é outro exemplo, usado no visualizador. Arestas sem setas são consideradas de mão dupla. Custos: A–B=2, A–C=4, B–D=5, B–E=2, C–E=1, C–F=5, D–G=3, E–G=6, F–G=4. Heurísticas: A=7, B=6, C=5, D=2, E=4, F=4, G=0. Empates seguem ordem de descoberta; E é gerado antes de F.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Etapa Gulosa</th>
+<th>Atual</th>
+<th>Aberta depois, por h</th>
+<th>Fechada</th>
+<th>Caminho até atual / custo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inicial</td>
+<td>—</td>
+<td>A(7)</td>
+<td>∅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td>A</td>
+<td>C(5), B(6)</td>
+<td>A</td>
+<td>A / 0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>C</td>
+<td>E(4), F(4), B(6)</td>
+<td>A,C</td>
+<td>A→C / 4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>E</td>
+<td>G(0), F(4), B(6)</td>
+<td>A,C,E</td>
+<td>A→C→E / 5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>G</td>
+<td>F(4), B(6)</td>
+<td>A,C,E</td>
+<td>A→C→E→G / 11</td>
+</tr>
+</tbody></table></div>
+<p>A prioridade não usa os custos das arestas, embora possamos somá-los para avaliar o resultado. No pior caso, a Aula 06 apresenta <strong>O(b^m)</strong>: a heurística pode orientar mal e a exploração ainda ser exponencial.</p>
+<h2>4. A* — prioridade máxima</h2>
+<p>Fonte: Aula 06, p. 13–23.</p>
+<p><strong>f(n) = g(n) + h(n)</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Significado</th>
+<th>Pergunta para lembrar</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>g</td>
+<td>Custo real já percorrido</td>
+<td>Quanto já gastei?</td>
+</tr>
+<tr>
+<td>h</td>
+<td>Custo restante estimado</td>
+<td>Quanto acredito que falta?</td>
+</tr>
+<tr>
+<td>f</td>
+<td>Custo total estimado passando pelo nó</td>
+<td>Quanto acredito que custará o caminho completo?</td>
+</tr>
+</tbody></table></div>
+<p>Exemplos elaborados: g=4,h=7→f=11; g=9,h=0→f=9; f=15,g=6→h=9; g=3 e transição de custo 5→g do sucessor=8. Se o sucessor tem h=4, f=12.</p>
+<p>A* escolhe <strong>menor f</strong>. Lista aberta guarda descobertos pendentes, normalmente em fila de prioridade. Lista fechada guarda expandidos. Melhor caminho para um estado pode exigir atualização e, em certas implementações, reabertura. <strong>É a escolha na fronteira que define a estratégia.</strong></p>
+<h3>A* manual no grafo da professora</h3>
+<p>Use o grafo anterior. Cada registro abaixo é nó(g,h,f). Os caminhos indicam os pais da melhor rota conhecida.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Atual</th>
+<th>Lista aberta depois</th>
+<th>Lista fechada</th>
+<th>Caminho parcial; custo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>—</td>
+<td>A(0,7,7)</td>
+<td>∅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td>A</td>
+<td>B(2,6,8), C(4,5,9)</td>
+<td>A</td>
+<td>A; 0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>B</td>
+<td>E(4,4,8), C(4,5,9), D(7,2,9)</td>
+<td>A,B</td>
+<td>A→B; 2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>E</td>
+<td>C(4,5,9), D(7,2,9), G(10,0,10)</td>
+<td>A,B,E</td>
+<td>A→B→E; 4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>C</td>
+<td>D(7,2,9), G(10,0,10), F(9,4,13)</td>
+<td>A,B,E,C</td>
+<td>A→C; 4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>D</td>
+<td>G(10,0,10), F(9,4,13)</td>
+<td>A,B,E,C,D</td>
+<td>A→B→D; 7</td>
+</tr>
+<tr>
+<td>6</td>
+<td>G</td>
+<td>F(9,4,13)</td>
+<td>A,B,E,C,D</td>
+<td>A→B→E→G; 10</td>
+</tr>
+</tbody></table></div>
+<p>Ao expandir E, ir a C custaria 5, pior que o 4 já conhecido; descartamos a melhoria inexistente. Ao expandir D, G também custaria 10: empate mantém o pai E. Há duas soluções ótimas de custo 10: A→B→E→G e A→B→D→G. A Gulosa encontrou custo 11 no mesmo grafo.</p>
+<h3>Admissível × consistente</h3>
+<p><strong>Admissível:</strong> h(n) ≤ h*(n), sendo h* o custo mínimo real restante. Nunca superestima. Se h*=10, h=7 e h=10 respeitam a condição nesse estado; h=14 não. Para a heurística toda ser admissível, a condição deve valer em todos os estados relevantes.</p>
+<p><strong>Consistente:</strong> h(n) ≤ c(n,n′)+h(n′) em toda transição. A estimativa atual não pode superar o custo até o vizinho somado à estimativa dele: uma desigualdade triangular. Exemplo elaborado: h(n)=7,c=3,h(n′)=4→7≤7, válida. Se h(n)=8, 8≤7 é falsa: inconsistente.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Propriedade</th>
+<th>Admissível</th>
+<th>Consistente</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Compara com</td>
+<td>Custo ótimo real h*</td>
+<td>Custo da aresta + h do vizinho</td>
+</tr>
+<tr>
+<td>Alcance do teste</td>
+<td>Estado versus objetivo</td>
+<td>Toda transição local</td>
+</tr>
+<tr>
+<td>Fórmula</td>
+<td>h≤h*</td>
+<td>h≤c+h′</td>
+</tr>
+<tr>
+<td>Ideia</td>
+<td>Não superestimar</td>
+<td>Coerência entre vizinhos</td>
+</tr>
+</tbody></table></div>
+<p>A aula afirma: <strong>toda heurística consistente é admissível</strong>.</p>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — Essa implicação usa h(objetivo)=0 e as condições usuais de caminhos até o objetivo. Somando as desigualdades ao longo de um caminho, obtemos h(início)≤custo do caminho. Admissibilidade sozinha não implica consistência. Exemplo dirigido: X→Y=1, Y→G=4; h(X)=5,h(Y)=0,h(G)=0. Todos subestimam ou igualam h*, mas X→Y viola 5≤1+0.</p>
+</blockquote>
+<h3>Quando A* garante menor custo?</h3>
+<p>A Aula 06, p. 17, afirma que uma heurística admissível pode garantir otimalidade em busca em árvore sob condições adequadas. Não transforme essa frase em garantia sem condições para qualquer código.</p>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — No cenário usual, ramificação finita, custos de passo ≥ ε&gt;0, h não negativa, h(objetivo)=0 e heurística admissível sustentam completude e otimalidade de A* em árvore. Em grafo, consistência permite fechar estados sem reabri-los; com admissibilidade e possível inconsistência, é necessário propagar melhorias e reabrir estados quando cabível. O objetivo deve ser aceito quando retirado pela prioridade. O site atualiza custos e reabre estados em A* e Custo Uniforme.</p>
+</blockquote>
+<h3>Qualidade, complexidade e vantagens</h3>
+<p>Se <strong>h=0 em todos os estados</strong>, f=g: A* se comporta como Custo Uniforme. Se h se aproxima do custo real, tende a direcionar melhor a busca. Se superestima, pode acelerar mas perde garantia de ótimo. Não é promessa de aceleração em qualquer instância.</p>
+<p>O slide usa <strong>O(b^d)</strong> no pior caso do A*, com b ramificação e d profundidade da solução. Memória pode ser alta porque mantém estados descobertos. Desempenho depende da heurística. A aula destaca menor custo sob condições adequadas, uso de conhecimento do domínio, redução de exploração desnecessária, aplicação em grafos/mapas, jogos e robótica e liberdade para escolher heurísticas.</p>
+<h3>Atividade prática do robô</h3>
+<p>Aula 06, p. 22–23. Use coordenadas (linha,coluna) iniciando em zero. S=(0,0), G=(4,4), # é parede. Movimentos cima, baixo, esquerda, direita; custo 1.</p>
+<pre><code>S . . # .
+# # . # .
+. . . . .
+. # # # .
+. . . . G
+</code></pre>
+<p>Tarefas: representar posições; calcular Manhattan; executar A*; apresentar caminho; somar custo. h(S)=|0−4|+|0−4|=8.</p>
+<p>Um caminho ótimo: (0,0)→(0,1)→(0,2)→(1,2)→(2,2)→(2,3)→(2,4)→(3,4)→(4,4). São 9 posições e <strong>8 movimentos</strong>, custo 8. Ao longo dele, g=0,1,2,3,4,5,6,7,8; h=8,7,6,5,4,3,2,1,0; f=8 em todos. A ramificação para (2,1) tem g=5,h=5,f=10 e aguarda enquanto há f=8.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Atual</th>
+<th>Aberta após expansão, nó:g/h/f</th>
+<th>Fechada acrescida</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(0,0)</td>
+<td>(0,1):1/7/8</td>
+<td>(0,0)</td>
+</tr>
+<tr>
+<td>(0,1)</td>
+<td>(0,2):2/6/8</td>
+<td>(0,1)</td>
+</tr>
+<tr>
+<td>(0,2)</td>
+<td>(1,2):3/5/8</td>
+<td>(0,2)</td>
+</tr>
+<tr>
+<td>(1,2)</td>
+<td>(2,2):4/4/8</td>
+<td>(1,2)</td>
+</tr>
+<tr>
+<td>(2,2)</td>
+<td>(2,3):5/3/8; (2,1):5/5/10</td>
+<td>(2,2)</td>
+</tr>
+<tr>
+<td>(2,3)</td>
+<td>(2,4):6/2/8; (2,1):5/5/10</td>
+<td>(2,3)</td>
+</tr>
+<tr>
+<td>(2,4)</td>
+<td>(3,4):7/1/8; (2,1):5/5/10; (1,4):7/3/10</td>
+<td>(2,4)</td>
+</tr>
+<tr>
+<td>(3,4)</td>
+<td>(4,4):8/0/8; (2,1):5/5/10; (1,4):7/3/10</td>
+<td>(3,4)</td>
+</tr>
+<tr>
+<td>(4,4)</td>
+<td>Objetivo retirado; termina</td>
+<td>Não expandido</td>
+</tr>
+</tbody></table></div>
+<p>Variações elaboradas, disponíveis no site: <strong>V1</strong>, bloquear (2,3): o caminho passa por (2,1),(2,0),(3,0),(4,0),(4,1),(4,2),(4,3),(4,4), custo total 12. <strong>V2</strong>, abrir (1,0): existe caminho (0,0),(1,0),(2,0),(3,0),(4,0),(4,1),(4,2),(4,3),(4,4), custo 8. <strong>V3</strong>, bloquear (1,2): S fica sem acesso ao restante e não há solução. Execute e explique por que h(S)=8 continua sendo apenas estimativa em V1.</p>
+<h2>5. Representação do conhecimento</h2>
+<p>Fonte: Aula 03, p. 2–44; apoio: Aula 04.</p>
+<p>Conhecimento organiza informações para compreender, relacionar, decidir, resolver e inferir. Apenas guardar valores não fornece regras para interpretá-los. Uma representação deve permitir armazenar fatos, identificar entidades, estabelecer relações, representar regras, inferir e obter novo conhecimento.</p>
+<h3>Dado, informação, conhecimento, inferência</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Exemplo da Aula 03, p. 5–7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Dado</td>
+<td>38,5, isoladamente</td>
+</tr>
+<tr>
+<td>Informação</td>
+<td>Temperatura = 38,5 °C</td>
+</tr>
+<tr>
+<td>Conhecimento</td>
+<td>Temperatura acima de 38 °C pode indicar febre</td>
+</tr>
+<tr>
+<td>Inferência/decisão no exemplo</td>
+<td>Aplicar a regra e recomendar avaliação</td>
+</tr>
+</tbody></table></div>
+<p>Outro exemplo da aula: Carlos tem nota 4,5; regra “se nota&lt;6, então abaixo da média”; conclusão “Carlos está abaixo da média”. Inferência é a aplicação do conhecimento aos fatos, não só armazená-los. Os exemplos de temperatura são modelos didáticos de regras.</p>
+<h3>Base de conhecimento</h3>
+<p>Armazena <strong>fatos, regras, relações, conceitos e propriedades</strong>. Exemplo: Ana é estudante; Carlos é professor; Carlos ensina IA; Ana estuda IA. Regra: quem estuda uma disciplina é aluno dessa disciplina. Inferência: Ana é aluna de IA.</p>
+<p>João tem 25 anos: entidade João, propriedade idade, valor 25; representações Pessoa(João), idade(João,25). Relação pode ligar duas entidades: LocalizadoEm(Manaus,Amazonas).</p>
+<h3>Declarativo × procedural</h3>
+<p>Declarativo é <strong>o que sabemos</strong>: “Manaus é uma cidade”, “Manaus está no Amazonas”. Procedural é <strong>como fazer</strong>: somar notas, dividir pela quantidade e comparar com média mínima. Pergunte se a frase declara um fato ou descreve um procedimento.</p>
+<h3>Seis formas de representação</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Característica</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Lógica</td>
+<td>Símbolos e regras formais</td>
+<td>Humano(Sócrates); ∀x(Humano(x)→Mortal(x))</td>
+</tr>
+<tr>
+<td>Regras de produção</td>
+<td>Condição → conclusão/ação</td>
+<td>SE nota&lt;6 ENTÃO abaixo_da_média</td>
+</tr>
+<tr>
+<td>Rede semântica</td>
+<td>Conceitos conectados e herança</td>
+<td>Rex é cachorro; cachorro é animal</td>
+</tr>
+<tr>
+<td>Frames</td>
+<td>Fichas de objetos/situações e atributos</td>
+<td>Aluno: nome, idade, curso</td>
+</tr>
+<tr>
+<td>Ontologias</td>
+<td>Conceitos e relações formais de um domínio</td>
+<td>Professor ministra Disciplina</td>
+</tr>
+<tr>
+<td>Grafos de conhecimento</td>
+<td>Entidades conectadas por relações</td>
+<td>Rafael gostou de Interestelar</td>
+</tr>
+</tbody></table></div>
+<h3>Lógica e inferência</h3>
+<p>Fato: Humano(Sócrates). Regra: ∀x(Humano(x)→Mortal(x)). Instanciando x=Sócrates, concluímos Mortal(Sócrates). Predicados expressam propriedades (Aluno(Maria)) ou relações (Estuda(Maria,IA), Pai(José,Carlos)). A relação tem direção: Pai(José,Carlos) não é o mesmo que Pai(Carlos,José).</p>
+<h3>Regras, memória e motor</h3>
+<p>Regra de produção: <strong>SE condição ENTÃO conclusão/ação</strong>. O motor de inferência seleciona regras aplicáveis aos fatos e gera conclusões. A base mantém conhecimento do domínio; a memória de trabalho mantém fatos do caso e resultados intermediários.</p>
+<p>Fluxo: base de conhecimento + memória de trabalho → motor de inferência → nova conclusão. No suporte técnico, uma regra pode converter características do computador em possível causa do problema.</p>
+<h3>Forward Chaining</h3>
+<p>Encadeamento para frente: <strong>dados → conclusões</strong>. Exemplo da Aula 03, p. 19: fato A; regras A→B, B→C, C→D.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Passo</th>
+<th>Fatos disponíveis</th>
+<th>Regra aplicada</th>
+<th>Novo fato</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>A</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td>A</td>
+<td>A→B</td>
+<td>B</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A,B</td>
+<td>B→C</td>
+<td>C</td>
+</tr>
+<tr>
+<td>3</td>
+<td>A,B,C</td>
+<td>C→D</td>
+<td>D</td>
+</tr>
+</tbody></table></div>
+<p>Use quando deseja descobrir consequências dos dados disponíveis. O motor pode parar quando chega à conclusão desejada ou quando nenhuma regra acrescenta fatos.</p>
+<h3>Backward Chaining</h3>
+<p>Encadeamento para trás: <strong>hipótese → condições → fatos</strong>. Para provar D, procure uma regra cuja conclusão seja D: C→D. Agora precisa provar C; use B→C. Para B, use A→B. A está nos fatos: confirma B, depois C, depois D.</p>
+<p>O slide usa hipótese de gripe e condições febre + tosse como ilustração de sistema especialista. Se uma condição não puder ser provada, aquela cadeia não confirma a hipótese.</p>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — “Não consegui provar” não significa automaticamente “provei falso”. A conclusão depende das regras e da interpretação da base. Não inverta uma implicação: A→B e B não bastam para concluir A.</p>
+</blockquote>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Forward</th>
+<th>Backward</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Começa com fatos</td>
+<td>Começa com meta/hipótese</td>
+</tr>
+<tr>
+<td>Busca consequências</td>
+<td>Busca condições que sustentam a meta</td>
+</tr>
+<tr>
+<td>O que posso concluir?</td>
+<td>Consigo provar isto?</td>
+</tr>
+<tr>
+<td>Bom para várias conclusões dos dados</td>
+<td>Bom para uma consulta específica</td>
+</tr>
+</tbody></table></div>
+<h3>Redes semânticas</h3>
+<p>Nós representam conceitos/entidades e conexões representam relações. Hierarquias permitem herança: mamíferos respiram; cachorros são mamíferos; Rex é cachorro; logo Rex respira. Outro encadeamento: Rex→é_um→Cachorro→é_um→Animal; inferimos Rex é animal. Relações como “possui” diferem de relações de categoria; herança precisa respeitar seu significado.</p>
+<h3>Frames</h3>
+<p>Frame é uma ficha com atributos. O exemplo Aluno: Carlos, 20 anos, Sistemas de Informação, 4º período, matriculado. No frame COMPUTADOR_01: Dell, Intel Core i5, 8 GB, Windows 11, Liga=SIM, Exibe_Imagem=NÃO, Conecta_Internet=NÃO INFORMADO, Temperatura=NORMAL.</p>
+<p>Regra da aula: SE Liga=SIM E Exibe_Imagem=NÃO ENTÃO Possível_Problema=&quot;Memória RAM ou vídeo&quot;. Outra: SE Liga=SIM E Exibe_Imagem=SIM E Conecta_Internet=NÃO ENTÃO Possível_Problema=&quot;Conectividade de rede&quot;.</p>
+<p><strong>Frame + regras + motor de inferência → diagnóstico sugerido.</strong> O frame organiza; a regra relaciona condições; o motor aplica. “NÃO INFORMADO” não é o mesmo que “NÃO”.</p>
+<h3>Ontologias</h3>
+<p>Representações formais de conceitos e relações em um domínio. Definem conceitos, categorias, propriedades, relações, restrições e hierarquia. No domínio acadêmico, Pessoa possui categorias Professor e Aluno; Disciplina pode ser Obrigatória ou Optativa; Professor ministra Disciplina, Aluno cursa Disciplina, Disciplina pertence a Curso.</p>
+<p>No e-commerce: Notebook é Computador; Computador é Eletrônico; Notebook possui processador e memória; é indicado para Programação. Programação é Desenvolvimento, uma Finalidade. Essas relações permitem aproximar “computador para desenvolvimento” de “notebook para programação”, em vez de depender só das palavras exatas.</p>
+<h3>Grafos de conhecimento</h3>
+<p>Representam entidades e relações em <strong>triplas: sujeito → relação → objeto</strong>. Exemplos da Aula 03: Rafael→gostou→Interestelar; Interestelar→diretor→Christopher Nolan; Interestelar→gênero→Ficção Científica. A Origem compartilha diretor e gênero e pode ser sugerido como recomendação. É uma possibilidade de recomendação, não prova de que Rafael gostará.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Estrutura</th>
+<th>Ênfase</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Rede semântica</td>
+<td>Conceitos conectados, significado e herança</td>
+</tr>
+<tr>
+<td>Ontologia</td>
+<td>Vocabulário formal, categorias, relações e restrições do domínio</td>
+</tr>
+<tr>
+<td>Grafo de conhecimento</td>
+<td>Entidades concretas e suas relações</td>
+</tr>
+</tbody></table></div>
+<p>As técnicas podem ser combinadas; não são categorias obrigatoriamente excludentes.</p>
+<h3>Simbólica × redes neurais — secundário</h3>
+<p>Aula 03, p. 37–42: IA simbólica usa símbolos e regras explícitas, frequentemente definidos por especialistas; facilita interpretação e raciocínio lógico. Redes neurais aprendem representações numéricas a partir dos dados, ajustando pesos; são boas para padrões e podem ser menos interpretáveis. Embeddings são representações vetoriais; IA neuro-simbólica combina os paradigmas. Esses pontos dão contexto, sem substituir o foco nas seis técnicas e nas buscas.</p>
+<h3>Atividades da Aula 03</h3>
+<p>Página 43: regra nota≥6 E frequência≥75% → APROVADO. João (7,80%) satisfaz ambas; Maria (5,90%) falha na nota; Pedro (8,60%) falha na frequência. A regra permite concluir APROVADO para João; não permite aprovar Maria e Pedro.</p>
+<blockquote>
+<p>COMPLEMENTO EXPLICATIVO — Para concluir formalmente REPROVADO, seria preciso uma regra correspondente ou uma convenção de classificação completa. Não inventamos essa regra como se estivesse no slide.</p>
+</blockquote>
+<p>Página 44: escolha diagnóstico de computador, sistema acadêmico, manutenção de veículos, suporte ou biblioteca. Defina 5 entidades, 5 fatos, 5 relações e 5 regras; represente em pelo menos duas técnicas. Exemplo elaborado de começo: entidades Ana, Bia, Livro1, Livro2, Biblioteca; fatos Aluno(Ana), Aluno(Bia), Livro(Livro1), Livro(Livro2), Biblioteca(Biblioteca); relações CadastradoEm(Ana,Biblioteca), CadastradoEm(Bia,Biblioteca), PertenceA(Livro1,Biblioteca), PertenceA(Livro2,Biblioteca), EmprestadoA(Livro1,Ana). Regras possíveis: Livro(x)→Item(x); Aluno(x)→Pessoa(x); EmprestadoA(l,p)→ComEmprestimo(p); PertenceA(l,b)→NoAcervo(l); CadastradoEm(p,b)→Usuario(p). Desenhe uma rede e escreva as mesmas afirmações em predicados.</p>
+<h2>6. Lógica como apoio</h2>
+<p>Fonte: Aula 04, p. 6–17, 23–24, 29–39.</p>
+<p>Proposição é uma sentença que pode ser verdadeira ou falsa. “10+5=20” é proposição falsa; “Feche a janela!” é ordem e não é proposição. P,Q,R representam proposições inteiras.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>P</th>
+<th>Q</th>
+<th>¬P</th>
+<th>P∧Q</th>
+<th>P∨Q</th>
+<th>P→Q</th>
+<th>P↔Q</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V</td>
+<td>V</td>
+<td>F</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr>
+<td>V</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>V</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>V</td>
+<td>V</td>
+<td>F</td>
+<td>V</td>
+<td>V</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>V</td>
+<td>F</td>
+<td>F</td>
+<td>V</td>
+<td>V</td>
+</tr>
+</tbody></table></div>
+<p>¬ nega; ∧ exige ambas; ∨ é ou inclusivo; → é falsa só em V→F; ↔ exige valores iguais. Use parênteses. Precedência da aula: ¬, ∧, ∨, →, ↔.</p>
+<p>Equivalências úteis: P→Q ≡ ¬P∨Q; ¬(P∧Q) ≡ ¬P∨¬Q; ¬(P∨Q) ≡ ¬P∧¬Q; ¬¬P ≡ P. Exemplo: negar “nota suficiente E frequência suficiente” produz “nota insuficiente OU frequência insuficiente”.</p>
+<p>Predicados abrem a estrutura da sentença. Em Aluno(João), João é constante: objeto específico. Em Aluno(x), x é variável. <strong>∀</strong> significa para todo; <strong>∃</strong> significa existe pelo menos um.</p>
+<ul>
+<li>Todo aluno estuda: ∀x(Aluno(x)→Estuda(x)).</li>
+<li>Existe aluno que estuda: ∃x(Aluno(x)∧Estuda(x)).</li>
+<li>Todo professor ensina algum aluno: ∀x(Professor(x)→∃y(Aluno(y)∧Ensina(x,y))).</li>
+<li>Existe professor que ensina todos os alunos: ∃x(Professor(x)∧∀y(Aluno(y)→Ensina(x,y))).</li>
+</ul>
+<p>Negação troca o quantificador e nega o predicado: <strong>¬∀x P(x) ≡ ∃x ¬P(x)</strong>; <strong>¬∃x P(x) ≡ ∀x ¬P(x)</strong>. A negação de “todos estudam” é “pelo menos um não estuda”, não “ninguém estuda”. Quando o domínio contém outras pessoas além de alunos, a negação de “todo aluno estuda” é ∃x(Aluno(x)∧¬Estuda(x)).</p>
+<h2>7. Critérios para memorizar</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Algoritmo</th>
+<th>Critério</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BFS</td>
+<td>Menor profundidade; FIFO</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>Aprofunda o ramo; último inserido; LIFO</td>
+</tr>
+<tr>
+<td>Custo Uniforme</td>
+<td>Menor g(n)</td>
+</tr>
+<tr>
+<td>Gulosa</td>
+<td>Menor h(n)</td>
+</tr>
+<tr>
+<td>A*</td>
+<td>Menor f(n)=g(n)+h(n)</td>
+</tr>
+</tbody></table></div>
+<p>Para praticar: identifique primeiro o critério, anote a convenção de desempate, retire um nó por vez, atualize a fronteira e guarde os pais. Só então reconstrua o caminho e some custos. Use o banco de questões, o visualizador e o resumo de 15 minutos do site.</p>
+<h1>Revisão de 15 minutos</h1>
+<h2>Minutos 0–3 · Escolha na fronteira</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Algoritmo</th>
+<th>Critério</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BFS</td>
+<td>Menor profundidade; FIFO</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>Aprofunda ramo; LIFO</td>
+</tr>
+<tr>
+<td>Custo Uniforme</td>
+<td>Menor g</td>
+</tr>
+<tr>
+<td>Gulosa</td>
+<td>Menor h</td>
+</tr>
+<tr>
+<td>A*</td>
+<td>Menor f=g+h</td>
+</tr>
+</tbody></table></div>
+<p>Estado é configuração; nó guarda estado e informações do caminho. Fronteira = descobertos pendentes; explorados = já expandidos. Ordem de visita não é caminho. Reconstrua pelos pais. Profundidade conta arestas; custo soma pesos. BFS é ótima com custos iguais; DFS não garante ótimo e pode seguir ramo infinito. Busca em grafo controla repetições. Limitada para em L; iterativa usa L=0,1,2…; bidirecional busca dos dois lados.</p>
+<h2>Minutos 3–7 · Heurística e A*</h2>
+<p><strong>g:</strong> gasto real; <strong>h:</strong> restante estimado; <strong>f:</strong> total estimado. g=3,h=5→f=8. Custo Uniforme usa g; Gulosa usa h; A* combina os dois.</p>
+<p><strong>Manhattan:</strong> |xn−xo|+|yn−yo|. De (2,3) a (7,6): 5+3=8. <strong>Euclidiana:</strong> √((xn−xo)²+(yn−yo)²)=√34≈5,83. Na grade de quatro direções e custo 1, use Manhattan.</p>
+<p><strong>Admissível:</strong> h≤h*, nunca superestima. <strong>Consistente:</strong> h(n)≤c(n,n′)+h(n′), para toda aresta. Consistente implica admissível na convenção usual h(objetivo)=0. Não confunda verificar uma aresta com provar consistência no grafo todo.</p>
+<p>Aberta: descobertos pendentes, menor f primeiro. Fechada: expandidos. Atualize caminhos melhores. <strong>COMPLEMENTO EXPLICATIVO:</strong> admissibilidade sustenta a garantia usual em árvore; em grafo, use consistência ou reabertura apropriada, além das condições de custos e término. h=0 torna A* Custo Uniforme. Superestimar pode retirar garantia de ótimo.</p>
+<p>No mapa da professora, de (0,0) a (4,4), custo ótimo=8: direita, direita, baixo, baixo, direita, direita, baixo, baixo. Nove posições não são nove movimentos. No grafo da Aula 06, Gulosa pode dar 11; A* dá 10.</p>
+<p>Complexidades apresentadas: BFS O(b^d); DFS tempo O(b^m); Gulosa O(b^m); A* O(b^d). b=ramificação, d=profundidade da solução, m=profundidade máxima. <strong>COMPLEMENTO EXPLICATIVO:</strong> a tabela da Aula 05 imprime espaço DFS O(b^m); a análise usual de DFS em árvore usa O(b·m), com ressalvas para armazenamento de visitados.</p>
+<h2>Minutos 7–12 · Conhecimento e inferência</h2>
+<p><strong>Dado:</strong> valor isolado. <strong>Informação:</strong> valor contextualizado. <strong>Conhecimento:</strong> regras/relações para interpretar. <strong>Inferência:</strong> conclusão obtida aplicando esse conhecimento. Carlos tem nota 4,5 e nota&lt;6 implica abaixo da média; logo Carlos está abaixo da média.</p>
+<p>Base: fatos, regras, relações, conceitos, propriedades. Declarativo: o que sei. Procedural: como fazer. <strong>Fatos + regras + motor de inferência</strong>, usando memória de trabalho, permitem novas conclusões.</p>
+<p><strong>Forward:</strong> fatos→conclusões (A→B→C→D). <strong>Backward:</strong> meta→condições→fatos (provar D exige C, depois B, depois A). Não inverta A→B para B→A.</p>
+<p><strong>Redes semânticas:</strong> nós e relações, hierarquia e herança; Rex é cachorro, cachorro é animal, logo Rex é animal. <strong>Frames:</strong> fichas de atributos; computador liga, não mostra imagem; regra sugere RAM ou vídeo. <strong>Ontologias:</strong> conceitos, categorias, relações, propriedades e restrições formais do domínio. <strong>Grafos de conhecimento:</strong> triplas sujeito→relação→objeto; Rafael→gostou→Interestelar.</p>
+<h2>Minutos 12–15 · Lógica e armadilhas</h2>
+<p>P∧Q exige ambas; P∨Q aceita uma ou ambas. P→Q só é falsa quando P é V e Q é F. P→Q equivale a ¬P∨Q. Predicado expressa propriedade/relação; constante é objeto específico; variável representa elemento do domínio.</p>
+<p>∀ = todo; ∃ = existe ao menos um. ¬∀xP(x)≡∃x¬P(x). ¬∃xP(x)≡∀x¬P(x). Todo aluno estuda: ∀x(Aluno(x)→Estuda(x)); existe aluno que estuda: ∃x(Aluno(x)∧Estuda(x)).</p>
+<p>IA simbólica: regras explícitas e símbolos; redes neurais: representações numéricas aprendidas. Esse contraste é secundário para a prova.</p>
+<h2>20 coisas que não posso esquecer</h2>
+<ol>
+<li>Estado não é nó.</li>
+<li>A seleção na fronteira define a estratégia.</li>
+<li>BFS usa FIFO e explora por níveis.</li>
+<li>DFS usa LIFO e a ordem dos sucessores importa.</li>
+<li>Ordem de visita não é caminho da solução.</li>
+<li>Profundidade conta passos; custo soma pesos.</li>
+<li>BFS minimiza custo quando os custos são iguais.</li>
+<li>DFS não garante solução ótima.</li>
+<li>Custo Uniforme escolhe menor g.</li>
+<li>Gulosa escolhe menor h.</li>
+<li>A* escolhe menor g+h.</li>
+<li>h é estimativa, não custo real.</li>
+<li>Manhattan soma módulos; Euclidiana usa raiz da soma dos quadrados.</li>
+<li>Admissível nunca superestima h*.</li>
+<li>Consistente respeita h≤c+h′ em toda transição.</li>
+<li>h=0 faz A* virar Custo Uniforme.</li>
+<li>Fatos e regras precisam de inferência para produzir novas conclusões.</li>
+<li>Forward começa em fatos; Backward começa na hipótese.</li>
+<li>Redes semânticas conectam conceitos; frames organizam atributos.</li>
+<li>Ontologias formalizam o domínio; grafos de conhecimento conectam entidades em triplas.</li>
+</ol>
+<p>Fontes: Aula 05, p. 4–37; Aula 06, p. 3–23; Aula 03, p. 5–39; Aula 04, p. 6–17 e 29–39.</p>
+<h1>Banco de 100 questões</h1>
+<p>Questões elaboradas para estudo; não são uma prova oficial. Gabarito ao final.</p>
+<h2>001 · Busca não informada · Múltipla escolha</h2>
+<p>Em P=(S,s0,A,T,G,C), o que representa S?</p>
+<ul>
+<li>Pilha de sucessores</li>
+<li>Conjunto de soluções ótimas</li>
+<li>Custo acumulado</li>
+<li>Conjunto de estados possíveis</li>
+</ul>
+<h2>002 · Busca não informada · Discursiva curta</h2>
+<p>Qual a diferença entre estado e nó?</p>
+<h2>003 · Busca não informada · Verdadeiro/falso</h2>
+<p>A fronteira contém apenas estados já expandidos. V ou F?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>004 · Busca não informada · Múltipla escolha</h2>
+<p>Qual estrutura define a fronteira da BFS?</p>
+<ul>
+<li>Fila por g+h</li>
+<li>Fila por h</li>
+<li>Fila FIFO</li>
+<li>Pilha LIFO</li>
+</ul>
+<h2>005 · Busca não informada · Múltipla escolha</h2>
+<p>Qual estrutura define a fronteira da DFS iterativa?</p>
+<ul>
+<li>Fila por menor g</li>
+<li>Fila FIFO</li>
+<li>Tabela por menor h</li>
+<li>Pilha LIFO</li>
+</ul>
+<h2>006 · Busca não informada · Execução de algoritmo</h2>
+<p>No grafo A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, qual a ordem de seleção BFS até H?</p>
+<ul>
+<li>A,B,D,E,H</li>
+<li>A,C,G,F,B,H</li>
+<li>A,B,E,H</li>
+<li>A,B,C,D,E,F,G,H</li>
+</ul>
+<h2>007 · Busca não informada · Múltipla escolha</h2>
+<p>No mesmo grafo explicitado: A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes. Qual caminho BFS de A até H?</p>
+<ul>
+<li>A→B→D→H</li>
+<li>A→C→H</li>
+<li>A→B→E→H</li>
+<li>A→B→C→D→E→F→G→H</li>
+</ul>
+<h2>008 · Busca não informada · Execução de algoritmo</h2>
+<p>Fila BFS [A]; A gera B,C. B é removido e gera D,E. Qual fila resulta, remoção à esquerda?</p>
+<ul>
+<li>C,D,E</li>
+<li>B,C,D,E</li>
+<li>E,D,C</li>
+<li>D,E,C</li>
+</ul>
+<h2>009 · Busca não informada · Execução de algoritmo</h2>
+<p>Pilha DFS [C,B], topo à direita. Remove B e insere E,D. Qual será o próximo removido?</p>
+<ul>
+<li>D</li>
+<li>E</li>
+<li>B</li>
+<li>C</li>
+</ul>
+<h2>010 · Busca não informada · Execução de algoritmo</h2>
+<p>DFS em A:[B,C], B:[D,E], C:[F,G], E:[H], folhas restantes, explorando da esquerda para a direita: seleção até H?</p>
+<ul>
+<li>A,C,F,G,H</li>
+<li>A,B,C,D,E,F,G,H</li>
+<li>A,B,E,D,H</li>
+<li>A,B,D,E,H</li>
+</ul>
+<h2>011 · Busca não informada · Múltipla escolha</h2>
+<p>Na pilha vazia, inserir B e depois C faz qual nó sair primeiro?</p>
+<ul>
+<li>Depende de h</li>
+<li>C</li>
+<li>B</li>
+<li>Ambos juntos</li>
+</ul>
+<h2>012 · Busca não informada · Verdadeiro/falso</h2>
+<p>A BFS garante menor custo quando todas as ações têm o mesmo custo positivo. V ou F?</p>
+<ul>
+<li>Falso</li>
+<li>Verdadeiro</li>
+</ul>
+<h2>013 · Busca não informada · Verdadeiro/falso</h2>
+<p>DFS sempre encontra o menor caminho. V ou F?</p>
+<ul>
+<li>Falso</li>
+<li>Verdadeiro</li>
+</ul>
+<h2>014 · Busca não informada · Discursiva curta</h2>
+<p>Por que a DFS pode falhar em espaço infinito?</p>
+<h2>015 · Busca não informada · Discursiva curta</h2>
+<p>O que é backtracking?</p>
+<h2>016 · Busca não informada · Cálculo</h2>
+<p>A→B custa 3, B→D custa 4, D→F custa 2. Qual g(F)?</p>
+<ul>
+<li>7</li>
+<li>3</li>
+<li>12</li>
+<li>9</li>
+</ul>
+<h2>017 · Busca não informada · Cálculo</h2>
+<p>No caminho A→B→D→F, qual a profundidade de F?</p>
+<ul>
+<li>9</li>
+<li>2</li>
+<li>4</li>
+<li>3</li>
+</ul>
+<h2>018 · Busca não informada · Múltipla escolha</h2>
+<p>Custo Uniforme escolhe qual valor?</p>
+<ul>
+<li>Menor g+h</li>
+<li>Menor h(n)</li>
+<li>Menor g(n)</li>
+<li>Maior profundidade</li>
+</ul>
+<h2>019 · Busca não informada · Múltipla escolha</h2>
+<p>A→B→G tem custo 15 em 2 passos; A→C→D→G tem custo 9 em 3 passos. Qual é mais barato?</p>
+<ul>
+<li>Os custos são iguais</li>
+<li>Não existe solução</li>
+<li>A→B→G</li>
+<li>A→C→D→G</li>
+</ul>
+<h2>020 · Busca não informada · Execução de algoritmo</h2>
+<p>Fronteira de Custo Uniforme: B(g=7), C(g=2), D(g=5). Quem sai?</p>
+<ul>
+<li>C</li>
+<li>B</li>
+<li>O último inserido</li>
+<li>D</li>
+</ul>
+<h2>021 · Busca não informada · Verdadeiro/falso</h2>
+<p>Busca limitada com L=2 encontra necessariamente uma solução na profundidade 3? V ou F?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>022 · Busca não informada · Múltipla escolha</h2>
+<p>Qual sequência de limites caracteriza aprofundamento iterativo?</p>
+<ul>
+<li>3,2,1,0</li>
+<li>0,0,0,0</li>
+<li>Sempre infinito</li>
+<li>0,1,2,3,…</li>
+</ul>
+<h2>023 · Busca não informada · Múltipla escolha</h2>
+<p>O que o aprofundamento iterativo combina?</p>
+<ul>
+<li>Heurística e treinamento</li>
+<li>Duas filas heurísticas</li>
+<li>Memória da DFS e busca de soluções rasas da BFS</li>
+<li>Maior custo e maior profundidade</li>
+</ul>
+<h2>024 · Busca não informada · Múltipla escolha</h2>
+<p>O que a busca bidirecional precisa fazer a partir do objetivo?</p>
+<ul>
+<li>Somente seguir arestas de saída do início</li>
+<li>Ignorar o início</li>
+<li>Calcular embeddings</li>
+<li>Gerar predecessores</li>
+</ul>
+<h2>025 · Busca não informada · Cálculo</h2>
+<p>Para b=3, quantos nós há em um nível completo de profundidade 5?</p>
+<ul>
+<li>243</li>
+<li>15</li>
+<li>125</li>
+<li>364</li>
+</ul>
+<h2>026 · Busca não informada · Cálculo</h2>
+<p>Com b=3, qual o total de nós até a profundidade 5, incluindo a raiz?</p>
+<ul>
+<li>364</li>
+<li>363</li>
+<li>729</li>
+<li>243</li>
+</ul>
+<h2>027 · Busca não informada · Associação</h2>
+<p>Associe b, d e m a seus significados.</p>
+<h2>028 · Busca não informada · Discursiva curta</h2>
+<p>Como impedir a repetição A→B→C→A em busca em grafo?</p>
+<h2>029 · Busca não informada · Discursiva curta</h2>
+<p>Por que sequência de visitas não é necessariamente caminho da solução?</p>
+<h2>030 · Busca não informada · Execução de algoritmo</h2>
+<p>Na atividade A:[B,C], B:[D,E], C:[F], D:[G], E:[G,H], F:[H], G:[I], H:[I], I:[], qual caminho BFS até I, vizinhos na ordem dada?</p>
+<ul>
+<li>A→B→D→G→I</li>
+<li>A→B→C→I</li>
+<li>A→B→E→H→I→G</li>
+<li>A→C→I</li>
+</ul>
+<h2>031 · Busca informada · Múltipla escolha</h2>
+<p>O que representa h(n)?</p>
+<ul>
+<li>Custo real já percorrido</li>
+<li>Quantidade de visitados</li>
+<li>Profundidade máxima</li>
+<li>Estimativa do custo restante até o objetivo</li>
+</ul>
+<h2>032 · Busca informada · Múltipla escolha</h2>
+<p>Qual é a prioridade da Busca Gulosa?</p>
+<ul>
+<li>Menor g+h</li>
+<li>Maior h(n)</li>
+<li>Menor h(n)</li>
+<li>Menor g(n)</li>
+</ul>
+<h2>033 · Busca informada · Múltipla escolha</h2>
+<p>Qual é a função de avaliação de A*?</p>
+<ul>
+<li>f=g×h</li>
+<li>f(n)=g(n)+h(n)</li>
+<li>f=g−h</li>
+<li>f=h−g</li>
+</ul>
+<h2>034 · Busca informada · Cálculo</h2>
+<p>Se g=4 e h=7, qual f?</p>
+<ul>
+<li>3</li>
+<li>7</li>
+<li>11</li>
+<li>28</li>
+</ul>
+<h2>035 · Busca informada · Cálculo</h2>
+<p>Se f=15 e g=6, qual h?</p>
+<ul>
+<li>2,5</li>
+<li>6</li>
+<li>21</li>
+<li>9</li>
+</ul>
+<h2>036 · Busca informada · Cálculo</h2>
+<p>Se g do pai é 3 e a aresta custa 5, qual g do sucessor?</p>
+<ul>
+<li>5</li>
+<li>15</li>
+<li>8</li>
+<li>3</li>
+</ul>
+<h2>037 · Busca informada · Cálculo</h2>
+<p>Manhattan de (2,3) até (7,6)?</p>
+<ul>
+<li>5,83</li>
+<li>2</li>
+<li>8</li>
+<li>34</li>
+</ul>
+<h2>038 · Busca informada · Cálculo</h2>
+<p>Manhattan de (0,0) até (4,4)?</p>
+<ul>
+<li>8</li>
+<li>4</li>
+<li>16</li>
+<li>5,66</li>
+</ul>
+<h2>039 · Busca informada · Cálculo</h2>
+<p>Manhattan de (3,4) até (1,1)?</p>
+<ul>
+<li>7</li>
+<li>5</li>
+<li>13</li>
+<li>1</li>
+</ul>
+<h2>040 · Busca informada · Cálculo</h2>
+<p>Manhattan de (−2,1) até (3,−3)?</p>
+<ul>
+<li>9</li>
+<li>7</li>
+<li>−9</li>
+<li>1</li>
+</ul>
+<h2>041 · Busca informada · Cálculo</h2>
+<p>Euclidiana de (0,0) até (3,4)?</p>
+<ul>
+<li>5</li>
+<li>7</li>
+<li>25</li>
+<li>1</li>
+</ul>
+<h2>042 · Busca informada · Cálculo</h2>
+<p>Euclidiana de (2,3) até (7,6)?</p>
+<ul>
+<li>8</li>
+<li>√8</li>
+<li>√34 ≈ 5,83</li>
+<li>34</li>
+</ul>
+<h2>043 · Busca informada · Múltipla escolha</h2>
+<p>Gulosa tem B(h=5) e C(h=7) na fronteira. Qual seleciona?</p>
+<ul>
+<li>C</li>
+<li>Ambos simultaneamente</li>
+<li>B</li>
+<li>Depende somente de g</li>
+</ul>
+<h2>044 · Busca informada · Execução de algoritmo</h2>
+<p>A* tem B(g=2,h=6), C(g=4,h=5) e E(g=4,h=4). Com empate por descoberta e B descoberto primeiro, quem sai?</p>
+<ul>
+<li>C</li>
+<li>E</li>
+<li>Não há como calcular f</li>
+<li>B</li>
+</ul>
+<h2>045 · Busca informada · Execução de algoritmo</h2>
+<p>No grafo da aula: A–B=2,A–C=4,B–D=5,B–E=2,C–E=1,C–F=5,D–G=3,E–G=6,F–G=4; h(B,C,D,E,F,G)=(6,5,2,4,4,0). Gulosa, E antes de F no empate, segue qual solução?</p>
+<ul>
+<li>A→B→D→G, custo 11</li>
+<li>A→C→E→G, custo 11</li>
+<li>A→C→F→G, custo 8</li>
+<li>A→B→E→G, custo 7</li>
+</ul>
+<h2>046 · Busca informada · Múltipla escolha</h2>
+<p>O que é lista aberta no A*?</p>
+<ul>
+<li>Nós descobertos ainda não expandidos, priorizados por f</li>
+<li>Apenas estados expandidos</li>
+<li>Somente o caminho final</li>
+<li>Todas as paredes</li>
+</ul>
+<h2>047 · Busca informada · Múltipla escolha</h2>
+<p>O que é lista fechada no A*?</p>
+<ul>
+<li>Nós nunca descobertos</li>
+<li>Estados já expandidos</li>
+<li>Todos os custos h</li>
+<li>Somente objetivos</li>
+</ul>
+<h2>048 · Busca informada · Múltipla escolha</h2>
+<p>Se h*=10, qual valor viola admissibilidade nesse estado?</p>
+<ul>
+<li>0</li>
+<li>7</li>
+<li>10</li>
+<li>14</li>
+</ul>
+<h2>049 · Busca informada · Verdadeiro/falso</h2>
+<p>Se h*=10 e h=7, a condição de admissibilidade vale nesse estado. V ou F?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>050 · Busca informada · Cálculo</h2>
+<p>Com h(n)=7, c=3 e h(n′)=4, a consistência vale nessa aresta?</p>
+<ul>
+<li>Sim, pois 7≥3+4</li>
+<li>Não, pois h deve ser zero</li>
+<li>Não, pois deveria ser estrita</li>
+<li>Sim, pois 7≤3+4</li>
+</ul>
+<h2>051 · Busca informada · Cálculo</h2>
+<p>Com h(n)=8, c=3 e h(n′)=4, a consistência vale nessa aresta?</p>
+<ul>
+<li>Sim, pois 8≥7</li>
+<li>Não, pois 8&gt;3+4</li>
+<li>Não se pode somar</li>
+<li>Sim, pois 8 é positivo</li>
+</ul>
+<h2>052 · Busca informada · Verdadeiro/falso</h2>
+<p>Toda heurística consistente é admissível nas condições usuais com h(objetivo)=0. V ou F?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>053 · Busca informada · Múltipla escolha</h2>
+<p>Se h(n)=0 para todo n, A* equivale a qual busca?</p>
+<ul>
+<li>Busca bidirecional</li>
+<li>Busca de Custo Uniforme</li>
+<li>Gulosa com Manhattan</li>
+<li>DFS</li>
+</ul>
+<h2>054 · Busca informada · Verdadeiro/falso</h2>
+<p>Uma heurística que superestima sempre mantém a garantia de ótimo do A*. V ou F?</p>
+<ul>
+<li>Falso</li>
+<li>Verdadeiro</li>
+</ul>
+<h2>055 · Busca informada · Múltipla escolha</h2>
+<p>Qual pior caso de tempo é apresentado para Gulosa na aula?</p>
+<ul>
+<li>O(log b)</li>
+<li>O(1)</li>
+<li>O(b^m)</li>
+<li>O(m)</li>
+</ul>
+<h2>056 · Busca informada · Múltipla escolha</h2>
+<p>Qual pior caso de tempo é apresentado para A* na aula?</p>
+<ul>
+<li>O(1)</li>
+<li>O(b^d)</li>
+<li>O(log d)</li>
+<li>O(d)</li>
+</ul>
+<h2>057 · Busca informada · Cálculo</h2>
+<p>Na grade original da professora, S=(0,0), G=(4,4). Qual h(S) Manhattan?</p>
+<ul>
+<li>0</li>
+<li>8</li>
+<li>4</li>
+<li>16</li>
+</ul>
+<h2>058 · Busca informada · Execução de algoritmo</h2>
+<p>Mapa S..#./##.#./...../.###./....G, quatro movimentos de custo 1: qual custo ótimo?</p>
+<ul>
+<li>Não há solução</li>
+<li>12</li>
+<li>9</li>
+<li>8</li>
+</ul>
+<h2>059 · Busca informada · Execução de algoritmo</h2>
+<p>No mapa S..#./##.#./...../.###./....G, bloquear também (2,3) faz o custo ótimo ser quanto?</p>
+<ul>
+<li>Não há solução</li>
+<li>9</li>
+<li>12</li>
+<li>8</li>
+</ul>
+<h2>060 · Busca informada · Associação</h2>
+<p>Associe g, h e f às três perguntas de A*.</p>
+<h2>061 · Representação do conhecimento · Múltipla escolha</h2>
+<p>38,5 sem contexto corresponde a quê no exemplo da aula?</p>
+<ul>
+<li>Inferência</li>
+<li>Regra</li>
+<li>Ontologia</li>
+<li>Dado</li>
+</ul>
+<h2>062 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Temperatura = 38,5 °C corresponde a quê?</p>
+<ul>
+<li>Dado isolado</li>
+<li>Procedimento</li>
+<li>Motor de inferência</li>
+<li>Informação</li>
+</ul>
+<h2>063 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Temperatura acima de 38 °C pode indicar febre é exemplo de quê?</p>
+<ul>
+<li>Conhecimento</li>
+<li>Pilha</li>
+<li>Sensor</li>
+<li>Número isolado</li>
+</ul>
+<h2>064 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Carlos tem nota 4,5; se nota&lt;6, então abaixo da média. Concluir que Carlos está abaixo da média é o quê?</p>
+<ul>
+<li>Inferência</li>
+<li>Ação de busca</li>
+<li>Heurística</li>
+<li>Armazenamento sem raciocínio</li>
+</ul>
+<h2>065 · Representação do conhecimento · Discursiva curta</h2>
+<p>Quais componentes a base de conhecimento armazena?</p>
+<h2>066 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Manaus está localizada no Amazonas é conhecimento de qual tipo?</p>
+<ul>
+<li>Heurístico</li>
+<li>Declarativo</li>
+<li>Exclusivamente numérico</li>
+<li>Procedural</li>
+</ul>
+<h2>067 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Somar notas e dividir pela quantidade descreve conhecimento de qual tipo?</p>
+<ul>
+<li>Procedural</li>
+<li>Uma ontologia</li>
+<li>Declarativo</li>
+<li>Uma constante</li>
+</ul>
+<h2>068 · Representação do conhecimento · Associação</h2>
+<p>Em idade(João,25), identifique entidade, propriedade e valor.</p>
+<h2>069 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Humano(Sócrates) e ∀x(Humano(x)→Mortal(x)) permitem concluir o quê?</p>
+<ul>
+<li>Mortal(Sócrates)</li>
+<li>Todo mortal é humano</li>
+<li>Sócrates é professor</li>
+<li>Ninguém é mortal</li>
+</ul>
+<h2>070 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Aluno(Maria) é um exemplo de quê?</p>
+<ul>
+<li>Fila de prioridade</li>
+<li>Custo do caminho</li>
+<li>Operador aritmético</li>
+<li>Predicado de propriedade</li>
+</ul>
+<h2>071 · Representação do conhecimento · Verdadeiro/falso</h2>
+<p>Pai(José,Carlos) equivale a Pai(Carlos,José). V ou F?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>072 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Qual estrutura caracteriza uma regra de produção?</p>
+<ul>
+<li>Somente sujeito sem relação</li>
+<li>Sempre uma lista numérica</li>
+<li>SE condição ENTÃO conclusão ou ação</li>
+<li>g+h</li>
+</ul>
+<h2>073 · Representação do conhecimento · Discursiva curta</h2>
+<p>Qual é a função do motor de inferência?</p>
+<h2>074 · Representação do conhecimento · Discursiva curta</h2>
+<p>Para que serve a memória de trabalho?</p>
+<h2>075 · Representação do conhecimento · Execução de algoritmo</h2>
+<p>Fato A e regras A→B, B→C, C→D. Qual sequência forward?</p>
+<ul>
+<li>D→A</li>
+<li>B→A→D→C</li>
+<li>A→B→C→D</li>
+<li>D→C→B→A</li>
+</ul>
+<h2>076 · Representação do conhecimento · Execução de algoritmo</h2>
+<p>Para provar D com A→B, B→C, C→D e fato A, qual é a sequência de submetas backward?</p>
+<ul>
+<li>A, B, C, D</li>
+<li>C, A, D, B</li>
+<li>A, D</li>
+<li>D, C, B, A</li>
+</ul>
+<h2>077 · Representação do conhecimento · Associação</h2>
+<p>Associe Forward e Backward ao ponto de partida.</p>
+<h2>078 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Rex é cachorro; cachorro é animal. Qual inferência?</p>
+<ul>
+<li>Rex é professor</li>
+<li>Nenhum cachorro é animal</li>
+<li>Todo animal é Rex</li>
+<li>Rex é animal</li>
+</ul>
+<h2>079 · Representação do conhecimento · Discursiva curta</h2>
+<p>Em rede semântica, o que representam nós e ligações?</p>
+<h2>080 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Uma ficha Aluno com nome, idade, curso e período exemplifica qual técnica?</p>
+<ul>
+<li>Frame</li>
+<li>Lista fechada</li>
+<li>Função heurística</li>
+<li>BFS</li>
+</ul>
+<h2>081 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Frame: Liga=SIM e Exibe_Imagem=NÃO. Pela regra da aula, qual possível problema?</p>
+<ul>
+<li>Custo elevado</li>
+<li>Memória RAM ou vídeo</li>
+<li>Aluno reprovado</li>
+<li>Conectividade de rede obrigatoriamente</li>
+</ul>
+<h2>082 · Representação do conhecimento · Verdadeiro/falso</h2>
+<p>Conecta_Internet=NÃO INFORMADO é igual a Conecta_Internet=NÃO. V ou F?</p>
+<ul>
+<li>Falso</li>
+<li>Verdadeiro</li>
+</ul>
+<h2>083 · Representação do conhecimento · Discursiva curta</h2>
+<p>O que uma ontologia define?</p>
+<h2>084 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Notebook é Computador; Computador é Eletrônico. Isso contribui para qual recurso de uma ontologia?</p>
+<ul>
+<li>Hierarquia de conceitos</li>
+<li>Custo uniforme</li>
+<li>Backtracking</li>
+<li>Fila LIFO</li>
+</ul>
+<h2>085 · Representação do conhecimento · Discursiva curta</h2>
+<p>Escreva uma tripla de conhecimento sobre Rafael e Interestelar.</p>
+<h2>086 · Representação do conhecimento · Discursiva curta</h2>
+<p>Por que A Origem pode ser recomendado após Interestelar no exemplo?</p>
+<h2>087 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Qual descrição corresponde à IA simbólica?</p>
+<ul>
+<li>Somente fila FIFO</li>
+<li>Somente imagens</li>
+<li>Conhecimento em símbolos e regras explícitas</li>
+<li>Somente pesos aprendidos sem regras explícitas</li>
+</ul>
+<h2>088 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Qual descrição corresponde às redes neurais?</p>
+<ul>
+<li>Aprendem representações numéricas a partir dos dados</li>
+<li>Somente triplas manuais</li>
+<li>Sempre regras escritas por especialista</li>
+<li>Sempre totalmente interpretáveis</li>
+</ul>
+<h2>089 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Qual é a negação de ∀x P(x)?</p>
+<ul>
+<li>∃x P(x)</li>
+<li>∃x ¬P(x)</li>
+<li>∀x ¬P(x)</li>
+<li>¬∃x P(x)</li>
+</ul>
+<h2>090 · Representação do conhecimento · Múltipla escolha</h2>
+<p>Regra nota≥6 E frequência≥75% → APROVADO. João(7,80%), Maria(5,90%), Pedro(8,60%): quem satisfaz a regra?</p>
+<ul>
+<li>Pedro</li>
+<li>Maria</li>
+<li>Os três</li>
+<li>João</li>
+</ul>
+<h2>091 · Mistas · Associação</h2>
+<p>Associe BFS, DFS, Custo Uniforme, Gulosa e A* aos critérios.</p>
+<h2>092 · Mistas · Discursiva curta</h2>
+<p>Um robô tem um mapa com paredes e deseja chegar a G. Diferencie representação e busca.</p>
+<h2>093 · Mistas · Cálculo</h2>
+<p>A fronteira possui X(g=9,h=1), Y(g=3,h=5). Quem Gulosa e A* escolhem, respectivamente?</p>
+<ul>
+<li>Y e X</li>
+<li>Y e Y</li>
+<li>X e Y</li>
+<li>X e X</li>
+</ul>
+<h2>094 · Mistas · Verdadeiro/falso</h2>
+<p>A* com h=0 torna-se BFS mesmo com custos de aresta diferentes. V ou F?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>095 · Mistas · Verdadeiro/falso</h2>
+<p>A→B e fato B permitem concluir A por lógica apenas. V ou F?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>096 · Mistas · Cálculo</h2>
+<p>No mapa original, o nó (2,2) foi alcançado com g=4. Para G=(4,4), calcule h Manhattan e f.</p>
+<ul>
+<li>h=0 e f=4</li>
+<li>h=8 e f=12</li>
+<li>h=4 e f=8</li>
+<li>h=4 e f=4</li>
+</ul>
+<h2>097 · Mistas · Cálculo</h2>
+<p>Um caminho tem 9 posições consecutivas e custo 1 por movimento. Qual custo?</p>
+<ul>
+<li>8</li>
+<li>10</li>
+<li>1</li>
+<li>9</li>
+</ul>
+<h2>098 · Mistas · Múltipla escolha</h2>
+<p>Qual técnica combina naturalmente ficha de atributos e regras para diagnóstico de computador?</p>
+<ul>
+<li>Somente Manhattan</li>
+<li>Pilha sem atributos</li>
+<li>Frames com motor de inferência</li>
+<li>BFS sem base de fatos</li>
+</ul>
+<h2>099 · Mistas · Verdadeiro/falso</h2>
+<p>P é verdadeiro e Q é falso. Qual o valor de P→Q?</p>
+<ul>
+<li>Verdadeiro</li>
+<li>Falso</li>
+</ul>
+<h2>100 · Mistas · Discursiva curta</h2>
+<p>Por que uma heurística útil não substitui o teste de objetivo?</p>
+<h1>Gabarito comentado</h1>
+<p><strong>001. Conjunto de estados possíveis</strong> S reúne configurações; s0 é apenas a configuração inicial. (Aula 05, p. 2–37)</p>
+<p><strong>002. Estado é configuração; nó é estrutura do algoritmo.</strong> Um nó pode guardar estado, pai, ação, profundidade e custo. (Aula 05, p. 2–37)</p>
+<p><strong>003. Falso</strong> Ela contém nós descobertos que aguardam expansão. (Aula 05, p. 2–37)</p>
+<p><strong>004. Fila FIFO</strong> O primeiro inserido é o primeiro removido. (Aula 05, p. 2–37)</p>
+<p><strong>005. Pilha LIFO</strong> O último inserido é o primeiro removido. (Aula 05, p. 2–37)</p>
+<p><strong>006. A,B,C,D,E,F,G,H</strong> A BFS retira por níveis, com vizinhos na ordem dada. (Aula 05, p. 2–37)</p>
+<p><strong>007. A→B→E→H</strong> O caminho vem dos pais de H, não da lista de visitas. (Aula 05, p. 2–37)</p>
+<p><strong>008. C,D,E</strong> C aguardava; D e E entram ao final. (Aula 05, p. 2–37)</p>
+<p><strong>009. D</strong> O topo fica D: pilha [C,E,D]. (Aula 05, p. 2–37)</p>
+<p><strong>010. A,B,D,E,H</strong> Após D sem filhos, retorna a E; H encerra a busca. (Aula 05, p. 2–37)</p>
+<p><strong>011. C</strong> O último inserido fica no topo. (Aula 05, p. 2–37)</p>
+<p><strong>012. Verdadeiro</strong> Minimizar passos equivale a minimizar o custo nessa condição. (Aula 05, p. 2–37)</p>
+<p><strong>013. Falso</strong> A profundidade do ramo não é critério de menor custo ou menor número de passos. (Aula 05, p. 2–37)</p>
+<p><strong>014. Pode seguir um ramo infinito sem explorar a alternativa com solução.</strong> Controlar ciclos não elimina a possibilidade de infinitos estados distintos. (Aula 05, p. 2–37)</p>
+<p><strong>015. Retornar para explorar uma alternativa pendente.</strong> Ao encerrar um ramo, a DFS retoma outro ramo disponível. (Aula 05, p. 2–37)</p>
+<p><strong>016. 9</strong> Somamos 3+4+2=9. (Aula 05, p. 2–37)</p>
+<p><strong>017. 3</strong> Há três arestas desde A, cuja profundidade é zero. (Aula 05, p. 2–37)</p>
+<p><strong>018. Menor g(n)</strong> Usa custo real acumulado, com fila de prioridade. (Aula 05, p. 2–37)</p>
+<p><strong>019. A→C→D→G</strong> Três passos podem custar menos do que dois. (Aula 05, p. 2–37)</p>
+<p><strong>020. C</strong> 2 é o menor custo acumulado. (Aula 05, p. 2–37)</p>
+<p><strong>021. Falso</strong> O limite impede expandir além da profundidade 2. (Aula 05, p. 2–37)</p>
+<p><strong>022. 0,1,2,3,…</strong> Cada execução repete DFS limitada com limite maior. (Aula 05, p. 2–37)</p>
+<p><strong>023. Memória da DFS e busca de soluções rasas da BFS</strong> Repete buscas limitadas para encontrar a menor profundidade. (Aula 05, p. 2–37)</p>
+<p><strong>024. Gerar predecessores</strong> Uma frente avança desde o início e outra no sentido inverso. (Aula 05, p. 2–37)</p>
+<p><strong>025. 243</strong> 3^5=243. (Aula 05, p. 2–37)</p>
+<p><strong>026. 364</strong> 1+3+9+27+81+243=364. (Aula 05, p. 2–37)</p>
+<p><strong>027. b: ramificação; d: profundidade da solução mais próxima; m: profundidade máxima.</strong> São os parâmetros empregados na análise de busca da aula. (Aula 05, p. 2–37)</p>
+<p><strong>028. Registrar estados explorados e controlar repetições.</strong> O conjunto permite reconhecer o retorno ao mesmo estado. (Aula 05, p. 2–37)</p>
+<p><strong>029. Visitas podem pertencer a ramos diferentes e não ter arestas entre si.</strong> A solução é reconstruída pelos pais, preservando as transições. (Aula 05, p. 2–37)</p>
+<p><strong>030. A→B→D→G→I</strong> G é descoberto via D antes de E; I é descoberto via G. (Aula 05, p. 2–37)</p>
+<p><strong>031. Estimativa do custo restante até o objetivo</strong> g mede o custo já percorrido; h estima o que falta. (Aula 06, p. 2–23)</p>
+<p><strong>032. Menor h(n)</strong> Ela ignora g na escolha, embora o custo do caminho possa ser calculado. (Aula 06, p. 2–23)</p>
+<p><strong>033. f(n)=g(n)+h(n)</strong> Soma gasto real e estimativa restante. (Aula 06, p. 2–23)</p>
+<p><strong>034. 11</strong> 4+7=11. (Aula 06, p. 2–23)</p>
+<p><strong>035. 9</strong> h=f−g=15−6. (Aula 06, p. 2–23)</p>
+<p><strong>036. 8</strong> O custo acumulado é 3+5. (Aula 06, p. 2–23)</p>
+<p><strong>037. 8</strong> 5+3=8, conforme exemplo da aula. (Aula 06, p. 2–23)</p>
+<p><strong>038. 8</strong> 4+4=8. (Aula 06, p. 2–23)</p>
+<p><strong>039. 5</strong> 2+3=5. (Aula 06, p. 2–23)</p>
+<p><strong>040. 9</strong> 5+4=9. (Aula 06, p. 2–23)</p>
+<p><strong>041. 5</strong> √(9+16)=5. (Aula 06, p. 2–23)</p>
+<p><strong>042. √34 ≈ 5,83</strong> √(25+9)=√34. (Aula 06, p. 2–23)</p>
+<p><strong>043. B</strong> Escolhe a menor estimativa, 5. (Aula 06, p. 2–23)</p>
+<p><strong>044. B</strong> B e E têm f=8; C tem f=9; desempate favorece B. (Aula 06, p. 2–23)</p>
+<p><strong>045. A→C→E→G, custo 11</strong> C tem h menor que B; E vence F no desempate; depois G tem h=0. (Aula 06, p. 2–23)</p>
+<p><strong>046. Nós descobertos ainda não expandidos, priorizados por f</strong> É a fronteira da busca. (Aula 06, p. 2–23)</p>
+<p><strong>047. Estados já expandidos</strong> Algumas implementações podem reabri-los se surgir rota melhor. (Aula 06, p. 2–23)</p>
+<p><strong>048. 14</strong> 14 supera o custo mínimo real 10. (Aula 06, p. 2–23)</p>
+<p><strong>049. Verdadeiro</strong> 7≤10; a propriedade global exige verificar todos os estados. (Aula 06, p. 2–23)</p>
+<p><strong>050. Sim, pois 7≤3+4</strong> A igualdade satisfaz a condição. (Aula 06, p. 2–23)</p>
+<p><strong>051. Não, pois 8&gt;3+4</strong> Uma única violação basta para mostrar inconsistência. (Aula 06, p. 2–23)</p>
+<p><strong>052. Verdadeiro</strong> A aula apresenta essa implicação; a apostila explicita a condição no objetivo. (Aula 06, p. 2–23)</p>
+<p><strong>053. Busca de Custo Uniforme</strong> f=g+0=g. (Aula 06, p. 2–23)</p>
+<p><strong>054. Falso</strong> A aula explica que a superestimação pode retirar essa garantia. (Aula 06, p. 2–23)</p>
+<p><strong>055. O(b^m)</strong> b é ramificação e m profundidade máxima. (Aula 06, p. 2–23)</p>
+<p><strong>056. O(b^d)</strong> É o limite exponencial apresentado no slide; a qualidade da heurística afeta a prática. (Aula 06, p. 2–23)</p>
+<p><strong>057. 8</strong> 4+4=8. (Aula 06, p. 2–23)</p>
+<p><strong>058. 8</strong> Caminho: (0,0),(0,1),(0,2),(1,2),(2,2),(2,3),(2,4),(3,4),(4,4). (Aula 06, p. 2–23)</p>
+<p><strong>059. 12</strong> O desvio passa pela esquerda da linha 2 e pela última linha; h(S) segue 8. (Aula 06, p. 2–23)</p>
+<p><strong>060. g: quanto gastei; h: quanto falta estimado; f: total estimado.</strong> g é real acumulado; h é previsão; f é sua soma. (Aula 06, p. 2–23)</p>
+<p><strong>061. Dado</strong> É um valor isolado sem interpretação contextual. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>062. Informação</strong> O valor ganhou contexto e unidade. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>063. Conhecimento</strong> É uma relação utilizada para interpretar informações no exemplo didático. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>064. Inferência</strong> Uma regra foi aplicada a um fato. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>065. Fatos, regras, relações, conceitos e propriedades.</strong> São as categorias apresentadas na Aula 03, p. 11. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>066. Declarativo</strong> Declara o que se sabe. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>067. Procedural</strong> Descreve como executar uma tarefa. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>068. Entidade João; propriedade idade; valor 25.</strong> A representação explicita componentes de uma informação. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>069. Mortal(Sócrates)</strong> A regra universal se aplica ao fato específico. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>070. Predicado de propriedade</strong> Atribui uma propriedade à entidade Maria. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>071. Falso</strong> A ordem dos argumentos determina a direção da relação. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>072. SE condição ENTÃO conclusão ou ação</strong> As condições determinam quando aplicar a regra. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>073. Aplicar regras aos fatos para gerar conclusões.</strong> Ele seleciona regras apropriadas e produz resultados. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>074. Guardar fatos do caso e resultados intermediários.</strong> É o contexto corrente usado pelo motor de inferência. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>075. A→B→C→D</strong> Parte dos fatos para derivar consequências. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>076. D, C, B, A</strong> Parte da conclusão desejada até alcançar um fato; depois confirma a cadeia. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>077. Forward: fatos; Backward: hipótese/meta.</strong> Um explora consequências, outro procura provas de uma consulta. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>078. Rex é animal</strong> A hierarquia permite herança. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>079. Nós: conceitos/entidades; ligações: relações.</strong> A semântica das ligações define o significado do grafo. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>080. Frame</strong> Frames organizam objetos ou situações em atributos. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>081. Memória RAM ou vídeo</strong> É exatamente a conclusão da regra de suporte apresentada. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>082. Falso</strong> Ausência de informação não equivale ao valor negativo. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>083. Conceitos, categorias, propriedades, relações e restrições do domínio.</strong> Pode incluir hierarquia e vocabulário formal. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>084. Hierarquia de conceitos</strong> Permite relacionar categorias mais específicas e mais gerais. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>085. Rafael → gostou → Interestelar</strong> Tripla é sujeito, relação e objeto; este exemplo está na aula. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>086. Compartilha diretor e gênero no grafo.</strong> As relações fornecem evidência de afinidade, sem garantir preferência. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>087. Conhecimento em símbolos e regras explícitas</strong> A aula contrasta com representações aprendidas pelas redes. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>088. Aprendem representações numéricas a partir dos dados</strong> O treinamento ajusta pesos; o conhecimento pode ser distribuído. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>089. ∃x ¬P(x)</strong> Troca ∀ por ∃ e nega o predicado. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><strong>090. João</strong> Maria falha na nota e Pedro na frequência; a regra dada só conclui aprovação. (Aula 03, p. 2–44; Aula 04, p. 6–39)</p>
+<p><em><em>091. BFS: FIFO; DFS: LIFO; Custo Uniforme: g; Gulosa: h; A</em>: g+h.</em>* A seleção do próximo nó define a estratégia. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>092. A representação descreve estados, ações e obstáculos; a busca escolhe uma sequência de ações.</strong> Modelar o problema precede aplicar a estratégia. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>093. X e Y</strong> Gulosa usa h: 1&lt;5. A* usa f: X=10,Y=8. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>094. Falso</strong> Torna-se Custo Uniforme; só sob condições adicionais sua ordem coincide com BFS. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>095. Falso</strong> É a inversão indevida da implicação; B pode ter outra causa. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>096. h=4 e f=8</strong> h=2+2=4; f=4+4=8. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>097. 8</strong> Entre 9 posições há 8 transições. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>098. Frames com motor de inferência</strong> O frame guarda sintomas e o motor aplica regras. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>099. Falso</strong> É o único caso falso da implicação. (Aulas 03–06; contexto Aula 02)</p>
+<p><strong>100. Ela estima custo restante; o teste verifica se o estado satisfaz a meta.</strong> Uma estimativa baixa não prova que se chegou ao destino. (Aulas 03–06; contexto Aula 02)</p>
+</article></main></body></html>

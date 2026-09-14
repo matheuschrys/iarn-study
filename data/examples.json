@@ -1,0 +1,30 @@
+{
+  "fonte": "Aula 06, p. 7–8 e 22–23",
+  "pontos": [
+    [
+      2,
+      3
+    ],
+    [
+      7,
+      6
+    ]
+  ],
+  "manhattan": 8,
+  "euclidiana": 5.830951894845301,
+  "mapa": [
+    "S..#.",
+    "##.#.",
+    ".....",
+    ".###.",
+    "....G"
+  ],
+  "movimentos": [
+    "cima",
+    "baixo",
+    "esquerda",
+    "direita"
+  ],
+  "custo": 1,
+  "heuristica": "Manhattan"
+}
